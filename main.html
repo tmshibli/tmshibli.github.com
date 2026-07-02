@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TM Shibli Nomani · Developer Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.6;
+        }
+        .card {
+            max-width: 780px;
+            width: 100%;
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 3rem 3rem 2.5rem;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+        }
+        /* No rounded corners — sharp */
+        .card, .badge, .link-btn, .divider { border-radius: 0 !important; }
+
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .badge {
+            background: #21262d;
+            border: 1px solid #30363d;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #8b949e;
+            display: inline-block;
+        }
+        .badge i { margin-right: 4px; color: #58a6ff; }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #f0f6fc;
+            margin-bottom: 0.3rem;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #8b949e;
+            margin-bottom: 1.8rem;
+            border-left: 3px solid #58a6ff;
+            padding-left: 1rem;
+        }
+        .subtitle strong { color: #f0f6fc; font-weight: 600; }
+
+        .divider {
+            height: 1px;
+            background: #30363d;
+            margin: 1.8rem 0;
+        }
+
+        .bio-text {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #c9d1d9;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+        }
+        .bio-text strong { color: #f0f6fc; font-weight: 600; }
+        .bio-text .highlight { color: #58a6ff; font-weight: 500; }
+
+        .feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1.5rem 0 2rem 0;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            padding: 1.5rem;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #8b949e;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        .feature-item i { color: #58a6ff; font-size: 1.1rem; width: 1.4rem; text-align: center; }
+        .feature-item strong { color: #f0f6fc; font-weight: 600; }
+
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #30363d;
+        }
+        .contact-email {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #8b949e;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+        .contact-email i { color: #58a6ff; }
+        .contact-email a {
+            color: #58a6ff;
+            text-decoration: none;
+            font-weight: 400;
+            border-bottom: 1px solid transparent;
+            transition: 0.2s ease;
+        }
+        .contact-email a:hover { border-bottom-color: #58a6ff; }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+        }
+        .social-links a {
+            color: #8b949e;
+            font-size: 1.3rem;
+            transition: 0.2s ease;
+            text-decoration: none;
+        }
+        .social-links a:hover { color: #f0f6fc; transform: translateY(-2px); }
+
+        .fun-fact {
+            margin-top: 1.8rem;
+            font-size: 0.9rem;
+            color: #8b949e;
+            border-left: 2px solid #30363d;
+            padding-left: 1.2rem;
+            font-style: italic;
+        }
+        .fun-fact strong { color: #f0f6fc; font-style: normal; }
+
+        @media (max-width: 600px) {
+            .card { padding: 2rem 1.5rem; }
+            h1 { font-size: 2.2rem; }
+            .contact-row { flex-direction: column; align-items: flex-start; }
+            .feature-grid { flex-direction: column; gap: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Badges -->
+        <div class="badge-group">
+            <span class="badge"><i class="fas fa-code"></i> React / Next.js</span>
+            <span class="badge"><i class="fas fa-robot"></i> AI Automation</span>
+            <span class="badge"><i class="fas fa-store"></i> Shopify</span>
+            <span class="badge"><i class="fas fa-paint-brush"></i> Design-Led</span>
+        </div>
+
+        <!-- Name & Title -->
+        <h1>TM Shibli Nomani</h1>
+        <div class="subtitle">
+            ✦ <strong>Design-Led Developer</strong> &amp; <strong>Automation Architect</strong>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Bio -->
+        <div class="bio-text">
+            I build performant, scalable UIs with <strong>React/Next.js</strong> and design intelligent workflows with <strong>n8n &amp; AI</strong>.
+        </div>
+
+        <!-- Feature Grid -->
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-rocket"></i>
+                <span>Currently crafting high-conversion commerce solutions on <strong>Shopify</strong> &amp; custom headless CMS.</span>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-brain"></i>
+                <span>Exploring the intersection of <strong>Generative AI</strong> and <strong>E-commerce</strong>.</span>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Contact & Socials -->
+        <div class="contact-row">
+            <div class="contact-email">
+                <i class="fas fa-envelope"></i>
+                <span>Reach me:</span>
+                <a href="mailto:tmshibli@karukaj.com.bd">tmshibli@karukaj.com.bd</a>
+            </div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/tmshibli" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/tmshibli" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/tmshibli" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://youtube.com/@tmshibli" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <!-- Fun Fact -->
+        <div class="fun-fact">
+            ⚡ <strong>Fun fact:</strong> I believe great code should be as beautiful as the UI it powers.
+        </div>
+
+        <!-- Footer Credit -->
+        <div style="margin-top: 2.5rem; font-size: 0.6rem; color: #30363d; text-align: center; letter-spacing: 0.05em; border-top: 1px solid #21262d; padding-top: 1.5rem;">
+            <i class="fas fa-cloud"></i> Hosted on GitHub Pages · Public Profile
+        </div>
+    </div>
+</body>
+</html>
