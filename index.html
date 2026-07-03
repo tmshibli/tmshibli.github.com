@@ -480,6 +480,18 @@
             .payment-icons { gap: 1rem; }
             .payment-icons span { font-size: 1rem; }
         }
+
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 12px 8px;
+    cursor: pointer;
+}
+
+        
     </style>
 </head>
 <body>
@@ -823,14 +835,12 @@
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // বাটন ডিজেবল ও লোডিং টেক্সট
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 statusDiv.style.display = 'block';
                 statusDiv.style.color = '#333';
                 statusDiv.textContent = 'Sending your message...';
 
-                // ফর্ম ডেটা সংগ্রহ
                 const templateParams = {
                     from_name: document.getElementById('user_name').value,
                     from_email: document.getElementById('user_email').value,
@@ -839,10 +849,9 @@
                     message: document.getElementById('user_message').value
                 };
 
-                // EmailJS-এ ইমেইল পাঠান
                 emailjs.send(
-                    'service_x4451da',    // Service ID (আপনি দিয়েছেন)
-                    'YOUR_TEMPLATE_ID',    // ← এখানে আপনার Template ID বসান
+                    'service_x4451da',    // Service ID
+                    'YOUR_TEMPLATE_ID',    //
                     templateParams
                 )
                 .then(function(response) {
