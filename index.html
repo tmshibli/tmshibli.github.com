@@ -689,32 +689,61 @@
     </section>
 
     <!-- ===== CONTACT ===== -->
+        <!-- ===== CONTACT (EmailJS) ===== -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
             <div class="section-title uppercase">Let's Pioneer</div>
             <p class="body-text" style="margin: 0 auto 2rem auto;">Ready to build something extraordinary? Let's connect.</p>
 
-            <!-- Static contact form (no backend) -->
-            <form class="contact-form" onsubmit="alert('Thank you for your message! I will get back to you soon.\n\n(Note: This is a static GitHub Pages site. For actual email delivery, please visit my PythonAnywhere site.)'); return false;">
+            <!-- ফর্ম সাবমিশনের স্ট্যাটাস মেসেজ দেখানোর জন্য -->
+            <div id="formStatus" style="margin-bottom:1.5rem; font-weight:500; display:none;"></div>
+
+            <form id="contactForm" class="contact-form">
+                <!-- নাম -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-user"></i></span>
-                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="text" name="name" id="user_name" placeholder="Your Name" required />
                 </div>
+
+                <!-- ইমেইল -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-envelope"></i></span>
-                    <input type="email" name="email" placeholder="Your Email" required />
+                    <input type="email" name="email" id="user_email" placeholder="Your Email" required />
                 </div>
+
+                <!-- সাবজেক্ট -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-pen"></i></span>
-                    <input type="text" name="subject" placeholder="Subject" />
+                    <input type="text" name="subject" id="user_subject" placeholder="Subject" />
                 </div>
+
+                <!-- সার্ভিস টাইপ ড্রপডাউন (নতুন) -->
+                <div class="form-group" style="border-bottom: 2px solid #e0e0e0;">
+                    <span class="icon"><i class="fas fa-concierge-bell"></i></span>
+                    <select name="service_type" id="service_type" style="width:100%; padding:0.8rem 0.5rem; background:transparent; border:none; outline:none; color:#111; font-size:1rem; font-family:'Inter', sans-serif; appearance:none; cursor:pointer;">
+                        <option value="" disabled selected>— Select Service —</option>
+                        <option value="Free Consultation">✨ Free Consultation</option>
+                        <option value="React / Next.js Development">⚛️ React / Next.js Development</option>
+                        <option value="AI Automation (n8n, OpenAI)">🤖 AI Automation (n8n, OpenAI)</option>
+                        <option value="Shopify Store Setup">🛍️ Shopify Store Setup</option>
+                        <option value="WordPress Development">📝 WordPress Development</option>
+                        <option value="Full‑Stack Web Application">🌐 Full‑Stack Web Application</option>
+                        <option value="Other / Custom Project">📌 Other / Custom Project</option>
+                    </select>
+                </div>
+
+                <!-- বার্তা -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-comment"></i></span>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <textarea name="message" id="user_message" placeholder="Your Message" required></textarea>
                 </div>
-                <button type="submit" class="btn-sharp"><i class="fas fa-paper-plane"></i> Send Message</button>
+
+                <button type="submit" class="btn-sharp" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
             </form>
 
+            <!-- সোশ্যাল আইকন ও পেমেন্ট মেথড (আগের মতো) -->
             <div class="social-icons">
                 <a href="https://linkedin.com/in/tmshibli" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/tmshibli" target="_blank"><i class="fab fa-github"></i></a>
