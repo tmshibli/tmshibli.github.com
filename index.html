@@ -458,7 +458,7 @@
 </head>
 <body>
 
-    <!-- ─── HERO ─── -->
+    <!-- HERO -->
     <section style="padding-top: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #e2e8f0;">
         <div class="container text-center">
             <div class="giant-name">TM SHIBLI<br />NOMANI</div>
@@ -475,7 +475,7 @@
         </div>
     </section>
 
-    <!-- ─── ABOUT ─── -->
+    <!-- ABOUT -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -497,7 +497,7 @@
         </div>
     </section>
 
-    <!-- ─── EXPERTISE ─── -->
+    <!-- EXPERTISE -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">⦿ Core Expertise</div>
@@ -510,7 +510,7 @@
         </div>
     </section>
 
-    <!-- ─── SERVICES ─── -->
+    <!-- SERVICES -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ What I Deliver</div>
@@ -525,7 +525,7 @@
         </div>
     </section>
 
-    <!-- ─── AUTOMATION ─── -->
+    <!-- AUTOMATION -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -551,7 +551,7 @@
         </div>
     </section>
 
-    <!-- ─── VALUE ─── -->
+    <!-- VALUE -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -570,7 +570,7 @@
         </div>
     </section>
 
-    <!-- ─── CLIENTS & IMPACT ─── -->
+    <!-- CLIENTS & IMPACT -->
     <section>
         <div class="container">
             <div class="text-center">
@@ -597,7 +597,7 @@
         </div>
     </section>
 
-    <!-- ─── TESTIMONIALS ─── -->
+    <!-- TESTIMONIALS -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ What Clients Say</div>
@@ -609,7 +609,7 @@
         </div>
     </section>
 
-    <!-- ─── RECOMMENDATIONS ─── -->
+    <!-- RECOMMENDATIONS -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ Recommendations &amp; Referrals</div>
@@ -624,7 +624,7 @@
         </div>
     </section>
 
-    <!-- ─── CONTACT ─── -->
+    <!-- ===== CONTACT ===== -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
             <div class="section-title uppercase">Contact TM SHIBLI</div>
@@ -689,52 +689,94 @@
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════ -->
-    <!-- EMAILJS SCRIPT – CHANGE THE THREE VALUES BELOW      -->
-    <!-- ═══════════════════════════════════════════════════════ -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-const SERVICE_ID = "service_y8sdaqg";
-const TEMPLATE_ID = "template_hd8fd77";
-const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
+    <!-- ========================================================= -->
+    <!-- EMAILJS JAVASCRIPT (সঠিক ভেরিয়েবল ম্যাপিং)              -->
+    <!-- ========================================================= -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        const SERVICE_ID = "service_y8sdaqg";
+        const TEMPLATE_ID = "template_hd8fd77";
+        const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
 
-emailjs.init(PUBLIC_KEY);
+        emailjs.init(PUBLIC_KEY);
 
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    const status = document.getElementById('formStatus');
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('formStatus');
+            const submitBtn = document.getElementById('submitBtn');
 
-    btn.disabled = true;
-    btn.innerHTML = 'Sending...';
-    status.style.display = 'block';
-    status.textContent = 'Sending...';
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-    // ভেরিয়েবল নামগুলো ঠিক করুন (টেমপ্লেটের সাথে মেলান)
-    const params = {
-        name: document.getElementById('user_name').value,
-        email: document.getElementById('user_email').value,
-        subject: document.getElementById('user_subject').value || 'No subject',
-        service_type: document.getElementById('service_type').value || 'Not specified',
-        message: document.getElementById('user_message').value
-    };
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                statusDiv.style.display = 'block';
+                statusDiv.style.color = '#333';
+                statusDiv.textContent = 'Sending your message...';
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
-        .then(() => {
-            status.style.color = 'green';
-            status.textContent = '✅ Success!';
-            this.reset();
-            btn.disabled = false;
-            btn.innerHTML = 'Send Message';
-        })
-        .catch((err) => {
-            status.style.color = 'red';
-            status.textContent = '❌ Error: ' + err.text;
-            btn.disabled = false;
-            btn.innerHTML = 'Send Message';
+                // ডেটা সংগ্রহ – নামগুলো টেমপ্লেটের সাথে হুবহু মিলিয়ে দিন
+                const templateParams = {
+                    name: document.getElementById('user_name').value,
+                    email: document.getElementById('user_email').value,
+                    subject: document.getElementById('user_subject').value || 'No subject',
+                    service_type: document.getElementById('service_type').value || 'Not specified',
+                    message: document.getElementById('user_message').value
+                };
+
+                // debugging: console-এ দেখুন ডেটা আসছে কিনা
+                console.log('Sending data:', templateParams);
+
+                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
+                    .then(function(response) {
+                        statusDiv.style.color = '#1a7a3a';
+                        statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
+                        form.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    })
+                    .catch(function(error) {
+                        statusDiv.style.color = '#b33';
+                        statusDiv.textContent = '❌ Error: ' + error.text;
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    });
+            });
         });
-});
-</script>
-    
+    </script>
+
+    <!-- GSAP Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
+            tiltElements.forEach(el => {
+                el.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
+                    this.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                    this.style.transition = 'transform 0.1s ease';
+                });
+                el.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+            });
+
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.card, .stat-box, .auto-feature, .testimonial-item, .value-bullet, .rec-card, .body-text, .section-title').forEach(el => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: 'top 95%', toggleActions: 'play none none none' },
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.8,
+                    ease: 'power1.out'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
