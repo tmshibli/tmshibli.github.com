@@ -694,46 +694,46 @@
     <!-- ═══════════════════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-    const SERVICE_ID = "service_y8sdaqg";
-    const TEMPLATE_ID = "template_hd8fd77";
-    const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
+const SERVICE_ID = "service_y8sdaqg";
+const TEMPLATE_ID = "template_hd8fd77";
+const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
 
-    emailjs.init(PUBLIC_KEY);
+emailjs.init(PUBLIC_KEY);
 
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        const status = document.getElementById('formStatus');
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const status = document.getElementById('formStatus');
 
-        btn.disabled = true;
-        btn.innerHTML = 'Sending...';
-        status.style.display = 'block';
-        status.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.innerHTML = 'Sending...';
+    status.style.display = 'block';
+    status.textContent = 'Sending...';
 
-        // ভেরিয়েবলের নাম টেমপ্লেটের সাথে মিলিয়ে দিন
-        const params = {
-            name: document.getElementById('user_name').value,
-            email: document.getElementById('user_email').value,
-            subject: document.getElementById('user_subject').value || 'No subject',
-            service_type: document.getElementById('service_type').value || 'Not specified',
-            message: document.getElementById('user_message').value
-        };
+    // ভেরিয়েবল নামগুলো ঠিক করুন (টেমপ্লেটের সাথে মেলান)
+    const params = {
+        name: document.getElementById('user_name').value,
+        email: document.getElementById('user_email').value,
+        subject: document.getElementById('user_subject').value || 'No subject',
+        service_type: document.getElementById('service_type').value || 'Not specified',
+        message: document.getElementById('user_message').value
+    };
 
-        emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
-            .then(() => {
-                status.style.color = 'green';
-                status.textContent = '✅ Success!';
-                this.reset();
-                btn.disabled = false;
-                btn.innerHTML = 'Send Message';
-            })
-            .catch((err) => {
-                status.style.color = 'red';
-                status.textContent = '❌ Error: ' + err.text;
-                btn.disabled = false;
-                btn.innerHTML = 'Send Message';
-            });
-    });
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
+        .then(() => {
+            status.style.color = 'green';
+            status.textContent = '✅ Success!';
+            this.reset();
+            btn.disabled = false;
+            btn.innerHTML = 'Send Message';
+        })
+        .catch((err) => {
+            status.style.color = 'red';
+            status.textContent = '❌ Error: ' + err.text;
+            btn.disabled = false;
+            btn.innerHTML = 'Send Message';
+        });
+});
 </script>
     
 </body>
