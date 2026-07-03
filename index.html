@@ -26,7 +26,6 @@
         section { padding: 5rem 0; border-bottom: 1px solid #e2e8f0; }
         section:last-of-type { border-bottom: none; }
 
-        /* TYPOGRAPHY */
         .giant-name {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 900;
@@ -66,7 +65,6 @@
         .body-text strong { color: #111; font-weight: 600; }
         .highlight { color: #111; font-weight: 500; border-bottom: 2px solid #ccc; }
 
-        /* CARDS */
         .card-grid {
             display: grid;
             gap: 1.5rem;
@@ -323,13 +321,44 @@
             line-height: 1.6;
         }
 
-        .contact-form {
-            max-width: 600px;
+        /* ===== CONTACT FORM (Custom Layout) ===== */
+        .contact-wrapper {
+            max-width: 900px;
+            width: 100%;
             margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2rem;
+        }
+
+        .form-left {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
+
+        .form-right {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-right .form-group {
+            flex: 1;
+            height: 100%;
+            align-items: flex-start;
+            padding-top: 0.2rem;
+        }
+
+        .form-right .form-group textarea {
+            min-height: 160px;
+            height: 100%;
+            padding: 0.8rem 0.5rem;
+            resize: vertical;
+        }
+
         .form-group {
             position: relative;
             display: flex;
@@ -339,7 +368,11 @@
             background: #ffffff;
             padding: 0 0.5rem;
         }
-        .form-group:focus-within { border-bottom-color: #111; }
+
+        .form-group:focus-within {
+            border-bottom-color: #111;
+        }
+
         .form-group .icon {
             color: #111;
             font-size: 1.2rem;
@@ -347,6 +380,7 @@
             text-align: center;
             flex-shrink: 0;
         }
+
         .form-group input,
         .form-group textarea,
         .form-group select {
@@ -359,10 +393,19 @@
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
         }
-        .form-group textarea { min-height: 100px; resize: vertical; }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
         .form-group input::placeholder,
         .form-group textarea::placeholder,
-        .form-group select:invalid { color: #aaa; font-weight: 300; }
+        .form-group select:invalid {
+            color: #aaa;
+            font-weight: 300;
+        }
+
         select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
@@ -370,6 +413,19 @@
             background-position: right 0.8rem center;
             background-size: 12px 8px;
             cursor: pointer;
+        }
+
+        /* Custom placeholder style for WhatsApp */
+        .whatsapp-placeholder {
+            position: relative;
+        }
+        .whatsapp-placeholder input {
+            width: 100%;
+        }
+        .whatsapp-placeholder input::placeholder {
+            color: #aaa;
+            font-weight: 300;
+            font-size: 0.95rem;
         }
 
         .btn-sharp {
@@ -386,10 +442,93 @@
             text-transform: uppercase;
             cursor: pointer;
             width: 100%;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
         }
+
         .btn-sharp:hover {
             background: #fff;
             color: #111;
+        }
+
+        .btn-sharp:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-sharp .btn-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Spam Warning */
+        .spam-warning {
+            font-size: 0.7rem;
+            color: #888;
+            text-align: center;
+            margin-top: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        .spam-warning i {
+            color: #f59e0b;
+            margin-right: 4px;
+        }
+
+        /* Form Status */
+        .form-status {
+            padding: 0.8rem 1.2rem;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            background: #f9fafc;
+            color: #333;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-weight: 500;
+        }
+
+        .form-status.success {
+            border-color: #1a7a3a;
+            background: #f0faf4;
+            color: #1a7a3a;
+        }
+
+        .form-status.error {
+            border-color: #b33;
+            background: #fdf0f0;
+            color: #b33;
+        }
+
+        /* ===== LOVE PARTICLES ===== */
+        #loveParticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
+        }
+
+        .love-particle {
+            position: absolute;
+            bottom: -30px;
+            font-size: 1.2rem;
+            animation: loveRise linear forwards;
+            opacity: 0;
+        }
+
+        @keyframes loveRise {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.5) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-120vh) scale(1.2) rotate(720deg);
+            }
         }
 
         .social-icons {
@@ -444,6 +583,13 @@
             section { padding: 3rem 0; }
             .giant-name { font-size: 3.5rem; }
             #hologram-container { height: 280px; }
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .form-right .form-group textarea {
+                min-height: 120px;
+            }
         }
         @media (max-width: 600px) {
             .card-grid-3 { grid-template-columns: 1fr; }
@@ -454,12 +600,14 @@
             .social-icons { gap: 1.5rem; }
             .payment-icons { gap: 1rem; }
             .payment-icons span { font-size: 1rem; }
+            .form-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .form-right .form-group textarea { min-height: 100px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HERO -->
+    <!-- ===== HERO ===== -->
     <section style="padding-top: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #e2e8f0;">
         <div class="container text-center">
             <div class="giant-name">TM SHIBLI<br />NOMANI</div>
@@ -476,7 +624,7 @@
         </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ===== ABOUT ===== -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -498,7 +646,7 @@
         </div>
     </section>
 
-    <!-- EXPERTISE -->
+    <!-- ===== EXPERTISE ===== -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">⦿ Core Expertise</div>
@@ -511,7 +659,7 @@
         </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- ===== SERVICES ===== -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ What I Deliver</div>
@@ -526,7 +674,7 @@
         </div>
     </section>
 
-    <!-- AUTOMATION -->
+    <!-- ===== AUTOMATION ===== -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -552,7 +700,7 @@
         </div>
     </section>
 
-    <!-- VALUE -->
+    <!-- ===== VALUE ===== -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -571,7 +719,7 @@
         </div>
     </section>
 
-    <!-- CLIENTS & IMPACT -->
+    <!-- ===== CLIENTS & IMPACT ===== -->
     <section>
         <div class="container">
             <div class="text-center">
@@ -598,7 +746,7 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
+    <!-- ===== TESTIMONIALS ===== -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ What Clients Say</div>
@@ -610,7 +758,7 @@
         </div>
     </section>
 
-    <!-- RECOMMENDATIONS -->
+    <!-- ===== RECOMMENDATIONS ===== -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ Recommendations &amp; Referrals</div>
@@ -625,49 +773,72 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- ============================================================ -->
+    <!-- ===== CONTACT SECTION (Custom Layout) ===== -->
+    <!-- ============================================================ -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
             <div class="section-title uppercase">Contact TM SHIBLI</div>
             <p class="body-text" style="margin: 0 auto 2rem auto;">Ready to build something extraordinary? Let's connect.</p>
 
-            <div id="formStatus" style="margin-bottom:1.5rem; font-weight:500; display:none;"></div>
+            <!-- Form Status -->
+            <div id="formStatus" class="form-status"></div>
 
-            <form id="contactForm" class="contact-form">
-                <div class="form-group">
-                    <span class="icon"><i class="fas fa-user"></i></span>
-                    <input type="text" name="name" id="user_name" placeholder="Your Name" required />
-                </div>
-                <div class="form-group">
-                    <span class="icon"><i class="fas fa-envelope"></i></span>
-                    <input type="email" name="email" id="user_email" placeholder="Your Email" required />
-                </div>
-                <div class="form-group">
-                    <span class="icon"><i class="fas fa-pen"></i></span>
-                    <input type="text" name="subject" id="user_subject" placeholder="Subject" />
-                </div>
-                <div class="form-group" style="border-bottom: 2px solid #e2e8f0;">
-                    <span class="icon"><i class="fas fa-concierge-bell"></i></span>
-                    <select name="service_type" id="service_type">
-                        <option value="" disabled selected>— Select Service —</option>
-                        <option value="Free Consultation">Free Consultation</option>
-                        <option value="React / Next.js Development">React / Next.js Development</option>
-                        <option value="AI Automation (n8n, OpenAI)">AI Automation (n8n, OpenAI)</option>
-                        <option value="Shopify Store Setup">Shopify Store Setup</option>
-                        <option value="WordPress Development">WordPress Development</option>
-                        <option value="Full‑Stack Web Application">Full‑Stack Web Application</option>
-                        <option value="Other / Custom Project">Other / Custom Project</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <span class="icon"><i class="fas fa-comment"></i></span>
-                    <textarea name="message" id="user_message" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="btn-sharp" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i> Send Message
-                </button>
-            </form>
+            <div class="contact-wrapper">
+                <form id="contactForm" novalidate>
+                    <div class="form-grid">
+                        <!-- LEFT: Name, Email, WhatsApp, Service -->
+                        <div class="form-left">
+                            <div class="form-group">
+                                <span class="icon"><i class="fas fa-user"></i></span>
+                                <input type="text" name="name" id="user_name" placeholder="Your Full Name" required autocomplete="name" />
+                            </div>
+                            <div class="form-group">
+                                <span class="icon"><i class="fas fa-envelope"></i></span>
+                                <input type="email" name="email" id="user_email" placeholder="Your Email Address" required autocomplete="email" />
+                            </div>
+                            <div class="form-group whatsapp-placeholder">
+                                <span class="icon"><i class="fab fa-whatsapp"></i></span>
+                                <input type="tel" name="whatsapp" id="user_whatsapp" placeholder="+1XXX XXXXXXX" required autocomplete="tel" />
+                            </div>
+                            <div class="form-group">
+                                <span class="icon"><i class="fas fa-concierge-bell"></i></span>
+                                <select name="service_type" id="service_type" required>
+                                    <option value="" disabled selected>— Select Your Service —</option>
+                                    <option value="Free Consultation">Free Consultation</option>
+                                    <option value="React / Next.js Development">React / Next.js Development</option>
+                                    <option value="AI Automation (n8n, OpenAI)">AI Automation (n8n, OpenAI)</option>
+                                    <option value="Shopify Store Setup">Shopify Store Setup</option>
+                                    <option value="WordPress Development">WordPress Development</option>
+                                    <option value="Full‑Stack Web Application">Full‑Stack Web Application</option>
+                                    <option value="Other / Custom Project">Other / Custom Project</option>
+                                </select>
+                            </div>
+                        </div>
 
+                        <!-- RIGHT: Message -->
+                        <div class="form-right">
+                            <div class="form-group">
+                                <span class="icon" style="align-self:flex-start; margin-top:0.8rem;"><i class="fas fa-comment"></i></span>
+                                <textarea name="message" id="user_message" placeholder="Tell me about your project, goals, and what you need help with..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Spam Warning -->
+                    <div class="spam-warning">
+                        <i class="fas fa-shield-alt"></i>
+                        Please check your inbox (and spam folder) for my reply. I usually respond within 24 hours.
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-sharp" id="submitBtn">
+                        <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Social & Payment Icons -->
             <div class="social-icons">
                 <a href="https://linkedin.com/in/tmshibli" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/tmshibli" target="_blank"><i class="fab fa-github"></i></a>
@@ -690,13 +861,18 @@
         </div>
     </section>
 
-    <!-- EMAILJS SCRIPT -->
+    <!-- ===== LOVE PARTICLES CONTAINER ===== -->
+    <div id="loveParticles"></div>
+
+    <!-- ============================================================ -->
+    <!-- EMAILJS SCRIPT                                               -->
+    <!-- ============================================================ -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        // EmailJS Credentials
+        // ===== EMAILJS CREDENTIALS =====
         const SERVICE_ID = "service_y8sdaqg";
         const ADMIN_TEMPLATE = "template_hd8fd77";
-        const AUTO_REPLY_TEMPLATE = "template_3b9dg0g";  // Updated ID
+        const AUTO_REPLY_TEMPLATE = "template_3b9dg0g";
         const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
 
         emailjs.init(PUBLIC_KEY);
@@ -705,57 +881,128 @@
             const form = document.getElementById('contactForm');
             const statusDiv = document.getElementById('formStatus');
             const submitBtn = document.getElementById('submitBtn');
+            const loveContainer = document.getElementById('loveParticles');
 
+            // ===== AUTO-FILL: Browser stores info, just trigger autocomplete =====
+            // All inputs have autocomplete attributes: name, email, tel
+            // Browsers will fill them automatically on click/focus
+
+            // ===== FORM SUBMISSION =====
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
+                // Validate all fields
+                const name = document.getElementById('user_name').value.trim();
+                const email = document.getElementById('user_email').value.trim();
+                const whatsapp = document.getElementById('user_whatsapp').value.trim();
+                const service = document.getElementById('service_type').value;
+                const message = document.getElementById('user_message').value.trim();
+
+                if (!name || !email || !whatsapp || !service || !message) {
+                    statusDiv.className = 'form-status error';
+                    statusDiv.style.display = 'block';
+                    statusDiv.textContent = '⚠️ Please fill in all fields.';
+                    return;
+                }
+
+                // Disable button
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                submitBtn.innerHTML = '<span class="btn-text"><i class="fas fa-spinner fa-spin"></i> Sending...</span>';
+                statusDiv.className = 'form-status';
                 statusDiv.style.display = 'block';
-                statusDiv.style.color = '#333';
                 statusDiv.textContent = 'Sending your message...';
+                statusDiv.style.color = '#333';
+                statusDiv.style.borderColor = '#e2e8f0';
+                statusDiv.style.background = '#f9fafc';
 
-                // 1. Admin Notification Data
+                // ===== Admin Params =====
                 const adminParams = {
-                    name: document.getElementById('user_name').value,
-                    email: document.getElementById('user_email').value,
-                    subject: document.getElementById('user_subject').value || 'No subject',
-                    service_type: document.getElementById('service_type').value || 'Not specified',
-                    message: document.getElementById('user_message').value
+                    name: name,
+                    email: email,
+                    whatsapp: whatsapp,
+                    service_type: service,
+                    message: message
                 };
 
-                // 2. Auto Reply Data (Sent to the user's email)
+                // ===== Auto Reply Params =====
                 const autoReplyParams = {
-                    to_email: document.getElementById('user_email').value,
-                    name: document.getElementById('user_name').value,
-                    service_type: document.getElementById('service_type').value || 'Not specified',
-                    message: document.getElementById('user_message').value
+                    to_email: email,
+                    name: name,
+                    whatsapp: whatsapp,
+                    service_type: service,
+                    message: message
                 };
 
-                // Send Admin email, then Auto Reply
+                // ===== Send Emails =====
                 emailjs.send(SERVICE_ID, ADMIN_TEMPLATE, adminParams)
                     .then(() => {
                         statusDiv.textContent = 'Sending confirmation to you...';
                         return emailjs.send(SERVICE_ID, AUTO_REPLY_TEMPLATE, autoReplyParams);
                     })
                     .then(() => {
-                        statusDiv.style.color = '#1a7a3a';
-                        statusDiv.textContent = '✅ Thank you! A confirmation email has been sent to you.';
+                        // Success!
+                        statusDiv.className = 'form-status success';
+                        statusDiv.style.display = 'block';
+                        statusDiv.textContent = '✅ Thank you! A confirmation email has been sent to your inbox. (Please check your spam folder if you don\'t see it.)';
+
+                        // Reset form
                         form.reset();
+
+                        // ===== LOVE PARTICLES =====
+                        launchLoveParticles();
+
+                        // Re-enable button
                         submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                        submitBtn.innerHTML = '<span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>';
                     })
                     .catch((error) => {
-                        statusDiv.style.color = '#b33';
-                        statusDiv.textContent = '❌ Error: ' + error.text;
+                        statusDiv.className = 'form-status error';
+                        statusDiv.style.display = 'block';
+                        statusDiv.textContent = '❌ Error: ' + error.text + '. Please try again.';
                         submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                        submitBtn.innerHTML = '<span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>';
                     });
             });
+
+            // ===== LOVE PARTICLES FUNCTION =====
+            function launchLoveParticles() {
+                const emojis = ['❤️', '💖', '💕', '💗', '💓', '♥️', '💘', '💝'];
+                const count = 35;
+
+                for (let i = 0; i < count; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'love-particle';
+                    particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    particle.style.left = (10 + Math.random() * 80) + '%';
+                    particle.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+                    particle.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+                    particle.style.animationDelay = (Math.random() * 1.5) + 's';
+
+                    // Random rotation and scale variation
+                    const randomRotate = (Math.random() - 0.5) * 40;
+                    particle.style.setProperty('--rotate', randomRotate + 'deg');
+
+                    loveContainer.appendChild(particle);
+
+                    // Remove after animation ends
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 6000);
+                }
+
+                // Clear after all done
+                setTimeout(() => {
+                    loveContainer.innerHTML = '';
+                }, 7000);
+            }
+
+            // ===== AUTO-FILL TRIGGER (click on fields to show browser suggestions) =====
+            // Browsers handle autocomplete automatically when input has autocomplete attribute.
+            // Just clicking the field will show saved suggestions.
         });
     </script>
 
-    <!-- GSAP -->
+    <!-- ===== GSAP ANIMATIONS ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
@@ -789,5 +1036,6 @@
             });
         });
     </script>
+
 </body>
 </html>
