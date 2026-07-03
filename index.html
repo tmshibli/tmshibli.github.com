@@ -692,89 +692,49 @@
     <!-- ═══════════════════════════════════════════════════════ -->
     <!-- EMAILJS SCRIPT – CHANGE THE THREE VALUES BELOW      -->
     <!-- ═══════════════════════════════════════════════════════ -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-        // 🔑 PASTE YOUR CORRECT CREDENTIALS HERE (from EmailJS dashboard)
-        const SERVICE_ID = "service_y8sdaqg";      // e.g., "service_xyz123"
-        const TEMPLATE_ID = "template_hd8fd77";    // e.g., "template_abc456"
-        const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";      // e.g., "user_xxxxx"
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+    const SERVICE_ID = "service_y8sdaqg";
+    const TEMPLATE_ID = "template_hd8fd77";
+    const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
 
-        // Initialize EmailJS
-        emailjs.init(PUBLIC_KEY);
+    emailjs.init(PUBLIC_KEY);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('contactForm');
-            const statusDiv = document.getElementById('formStatus');
-            const submitBtn = document.getElementById('submitBtn');
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const status = document.getElementById('formStatus');
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+        btn.disabled = true;
+        btn.innerHTML = 'Sending...';
+        status.style.display = 'block';
+        status.textContent = 'Sending...';
 
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                statusDiv.style.display = 'block';
-                statusDiv.style.color = '#333';
-                statusDiv.textContent = 'Sending your message...';
+        // ভেরিয়েবলের নাম টেমপ্লেটের সাথে মিলিয়ে দিন
+        const params = {
+            name: document.getElementById('user_name').value,
+            email: document.getElementById('user_email').value,
+            subject: document.getElementById('user_subject').value || 'No subject',
+            service_type: document.getElementById('service_type').value || 'Not specified',
+            message: document.getElementById('user_message').value
+        };
 
-                const templateParams = {
-                    from_name: document.getElementById('user_name').value,
-                    from_email: document.getElementById('user_email').value,
-                    subject: document.getElementById('user_subject').value || 'No subject',
-                    service_type: document.getElementById('service_type').value || 'Not specified',
-                    message: document.getElementById('user_message').value
-                };
-
-                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-                    .then(function(response) {
-                        statusDiv.style.color = '#1a7a3a';
-                        statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
-                        form.reset();
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                    })
-                    .catch(function(error) {
-                        statusDiv.style.color = '#b33';
-                        statusDiv.textContent = '❌ Error: ' + error.text + '. Please check your Service ID & Template ID.';
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                    });
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
+            .then(() => {
+                status.style.color = 'green';
+                status.textContent = '✅ Success!';
+                this.reset();
+                btn.disabled = false;
+                btn.innerHTML = 'Send Message';
+            })
+            .catch((err) => {
+                status.style.color = 'red';
+                status.textContent = '❌ Error: ' + err.text;
+                btn.disabled = false;
+                btn.innerHTML = 'Send Message';
             });
-        });
-    </script>
-
-    <!-- GSAP Animations -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
-            tiltElements.forEach(el => {
-                el.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -6;
-                    const rotateY = ((x - centerX) / centerX) * 6;
-                    this.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-                    this.style.transition = 'transform 0.1s ease';
-                });
-                el.addEventListener('mouseleave', function() {
-                    this.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
-                    this.style.transition = 'transform 0.3s ease';
-                });
-            });
-
-            gsap.registerPlugin(ScrollTrigger);
-            gsap.utils.toArray('.card, .stat-box, .auto-feature, .testimonial-item, .value-bullet, .rec-card, .body-text, .section-title').forEach(el => {
-                gsap.from(el, {
-                    scrollTrigger: { trigger: el, start: 'top 95%', toggleActions: 'play none none none' },
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.8,
-                    ease: 'power1.out'
-                });
-            });
-        });
-    </script>
+    });
+</script>
+    
 </body>
 </html>
