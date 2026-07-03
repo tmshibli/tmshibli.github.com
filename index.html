@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,22 +11,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
-        /* ─── রিসেট ─── */
+        /* ─── RESET ─── */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: #ffffff;
+            background: #f5f7fa;
             color: #1a1a1a;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
         * { border-radius: 0 !important; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-        section { padding: 5rem 0; border-bottom: 1px solid #e8e8e8; }
+        section { padding: 5rem 0; border-bottom: 1px solid #e2e8f0; }
         section:last-of-type { border-bottom: none; }
 
-        /* ─── টাইপোগ্রাফি ─── */
+        /* ─── TYPOGRAPHY ─── */
         .giant-name {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 900;
@@ -66,7 +66,7 @@
         .body-text strong { color: #111; font-weight: 600; }
         .highlight { color: #111; font-weight: 500; border-bottom: 2px solid #ccc; }
 
-        /* ─── কার্ড ─── */
+        /* ─── CARDS ─── */
         .card-grid {
             display: grid;
             gap: 1.5rem;
@@ -76,8 +76,8 @@
         .card-grid-4 { grid-template-columns: repeat(4, 1fr); }
 
         .card, .stat-box, .auto-feature, .testimonial-item, .value-bullet, .rec-card {
-            background: #fafafa;
-            border: 1px solid #ececec;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             padding: 2rem 1.5rem;
             transition: all 0.2s ease;
             will-change: transform;
@@ -85,8 +85,8 @@
             perspective: 600px;
         }
         .card:hover, .stat-box:hover, .auto-feature:hover, .testimonial-item:hover, .rec-card:hover {
-            background: #f5f5f5;
-            border-color: #ccc;
+            background: #f8fafc;
+            border-color: #cbd5e1;
             transform: translateY(-4px) scale(1.01);
             box-shadow: 0 8px 25px rgba(0,0,0,0.04);
         }
@@ -118,7 +118,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* ─── রেকমেন্ডেশন লিংক ─── */
+        /* ─── RECOMMENDATION LINK ─── */
         .rec-link {
             display: inline-block;
             margin-top: 1rem;
@@ -140,7 +140,7 @@
             color: #111;
         }
 
-        /* ─── পরিসংখ্যান ─── */
+        /* ─── STATS ─── */
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -159,7 +159,7 @@
             margin-top: 4px;
         }
 
-        /* ─── ভ্যালু বুলেট ─── */
+        /* ─── VALUE BULLET ─── */
         .value-bullet {
             display: flex;
             gap: 1.2rem;
@@ -200,7 +200,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ─── হলোগ্রাম কার্ড ─── */
+        /* ─── HOLOGRAM CARD ─── */
         #hologram-container {
             position: relative;
             width: 100%;
@@ -210,8 +210,8 @@
         #hologram-card {
             width: 100%;
             height: 100%;
-            background: #fafafa;
-            border: 1px solid #e0e0e0;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -243,7 +243,7 @@
         #hologram-card p { color: #555; font-weight: 300; text-align: center; max-width: 80%; }
         #hologram-card .tag { margin-top: 1rem; font-size: 0.65rem; color: #888; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid #ddd; padding: 0.3rem 1.5rem; }
 
-        /* ─── ক্লায়েন্ট সেকশন ─── */
+        /* ─── CLIENTS SECTION ─── */
         .client-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -254,15 +254,15 @@
         .client-wrapper .stat-grid { align-content: start; }
         .client-wrapper #hologram-container { height: 100%; min-height: 280px; }
 
-        /* ─── টেস্টিমোনিয়াল ─── */
+        /* ─── TESTIMONIALS ─── */
         .testimonial-item {
-            background: #fafafa;
-            border: 1px solid #ececec;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             padding: 2rem 1.8rem;
         }
         .testimonial-item:hover {
-            background: #f5f5f5;
-            border-color: #ccc;
+            background: #f8fafc;
+            border-color: #cbd5e1;
             transform: translateY(-4px);
         }
         .testimonial-item i {
@@ -294,18 +294,18 @@
             letter-spacing: 0.05em;
         }
 
-        /* ─── রেকমেন্ডেশন ─── */
+        /* ─── RECOMMENDATIONS ─── */
         .rec-card {
-            background: #fafafa;
-            border: 1px solid #ececec;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             padding: 2rem 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
             cursor: default;
         }
         .rec-card:hover {
-            background: #f0f0f0;
-            border-color: #bbb;
+            background: #f8fafc;
+            border-color: #cbd5e1;
             transform: translateY(-6px) scale(1.02);
             box-shadow: 0 12px 30px rgba(0,0,0,0.06);
         }
@@ -330,7 +330,7 @@
             line-height: 1.6;
         }
 
-        /* ─── কন্টাক্ট ফর্ম ─── */
+        /* ─── CONTACT FORM ─── */
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -342,8 +342,10 @@
             position: relative;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #e0e0e0;
+            border-bottom: 2px solid #e2e8f0;
             transition: border-color 0.3s ease;
+            background: #ffffff;
+            padding: 0 0.5rem;
         }
         .form-group:focus-within { border-bottom-color: #111; }
         .form-group .icon {
@@ -475,19 +477,19 @@
 </head>
 <body>
 
-    <!-- ===== হিরো ===== -->
-    <section style="padding-top: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #eee;">
+    <!-- ===== HERO ===== -->
+    <section style="padding-top: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #e2e8f0;">
         <div class="container text-center">
             <div class="giant-name">TM SHIBLI<br />NOMANI</div>
             <p style="font-size: clamp(1.2rem, 2.5vw, 2rem); font-weight: 300; color: #333; margin-top: 0.5rem; letter-spacing: 0.02em;">
                 ✦ translating vision into exceptional digital experiences ✦
             </p>
             <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem;">
-                <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fab fa-react" style="margin-right:6px;"></i> React</span>
-                <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fas fa-robot" style="margin-right:6px;"></i> AI Automation</span>
-                <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fas fa-store" style="margin-right:6px;"></i> Shopify</span>
-                <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fab fa-wordpress" style="margin-right:6px;"></i> WordPress</span>
-                <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fas fa-paint-brush" style="margin-right:6px;"></i> Design-Led</span>
+                <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fab fa-react" style="margin-right:6px;"></i> React</span>
+                <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fas fa-robot" style="margin-right:6px;"></i> AI Automation</span>
+                <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fas fa-store" style="margin-right:6px;"></i> Shopify</span>
+                <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fab fa-wordpress" style="margin-right:6px;"></i> WordPress</span>
+                <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.3rem 1.4rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;"><i class="fas fa-paint-brush" style="margin-right:6px;"></i> Design-Led</span>
             </div>
         </div>
     </section>
@@ -558,11 +560,11 @@
                     <p class="body-text">Automation &amp; AI Agents that work <strong>24/7</strong>, so you don't have to.</p>
                     <p class="body-text">From WhatsApp bots that engage customers in real-time, to full-scale business process automation that connects CRMs, email, and databases — I turn repetitive tasks into <strong>seamless, self-orchestrated systems</strong> that save time and scale effortlessly.</p>
                     <div style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem;">
-                        <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">✦ AI-Native</span>
-                        <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">Self-Orchestrated</span>
-                        <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">24/7 Uptime</span>
-                        <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">Scalable</span>
-                        <span style="background: #f5f5f5; border: 1px solid #eee; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">Zero Friction</span>
+                        <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">✦ AI-Native</span>
+                        <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">Self-Orchestrated</span>
+                        <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">24/7 Uptime</span>
+                        <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">Scalable</span>
+                        <span style="background: #ffffff; border: 1px solid #e2e8f0; padding: 0.4rem 1.5rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #444;">Zero Friction</span>
                     </div>
                 </div>
                 <div class="card-grid card-grid-2" style="align-content:start;">
@@ -682,7 +684,7 @@
     <!-- ===== CONTACT (EmailJS) ===== -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
-            <div class="section-title uppercase">Let's Pioneer</div>
+            <div class="section-title uppercase">Contact TM SHIBLI</div>
             <p class="body-text" style="margin: 0 auto 2rem auto;">Ready to build something extraordinary? Let's connect.</p>
 
             <div id="formStatus" style="margin-bottom:1.5rem; font-weight:500; display:none;"></div>
@@ -700,7 +702,7 @@
                     <span class="icon"><i class="fas fa-pen"></i></span>
                     <input type="text" name="subject" id="user_subject" placeholder="Subject" />
                 </div>
-                <div class="form-group" style="border-bottom: 2px solid #e0e0e0;">
+                <div class="form-group" style="border-bottom: 2px solid #e2e8f0;">
                     <span class="icon"><i class="fas fa-concierge-bell"></i></span>
                     <select name="service_type" id="service_type">
                         <option value="" disabled selected>— Select Service —</option>
@@ -744,7 +746,9 @@
         </div>
     </section>
 
-    <!-- EmailJS Script -->
+    <!-- ============================================================ -->
+    <!-- EMAILJS SCRIPT                                               -->
+    <!-- ============================================================ -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         emailjs.init("I2dT5S5NuLKgHHHaM");
@@ -788,7 +792,7 @@
         });
     </script>
 
-    <!-- GSAP Animations -->
+    <!-- ===== GSAP ANIMATIONS ===== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
