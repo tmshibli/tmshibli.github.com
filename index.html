@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
-        /* ─── RESET ─── */
+        /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -26,7 +26,7 @@
         section { padding: 5rem 0; border-bottom: 1px solid #e2e8f0; }
         section:last-of-type { border-bottom: none; }
 
-        /* ─── TYPOGRAPHY ─── */
+        /* TYPOGRAPHY */
         .giant-name {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 900;
@@ -66,7 +66,7 @@
         .body-text strong { color: #111; font-weight: 600; }
         .highlight { color: #111; font-weight: 500; border-bottom: 2px solid #ccc; }
 
-        /* ─── CARDS ─── */
+        /* CARDS */
         .card-grid {
             display: grid;
             gap: 1.5rem;
@@ -118,7 +118,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* ─── RECOMMENDATION LINK ─── */
         .rec-link {
             display: inline-block;
             margin-top: 1rem;
@@ -140,7 +139,6 @@
             color: #111;
         }
 
-        /* ─── STATS ─── */
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -159,7 +157,6 @@
             margin-top: 4px;
         }
 
-        /* ─── VALUE BULLET ─── */
         .value-bullet {
             display: flex;
             gap: 1.2rem;
@@ -200,7 +197,6 @@
             transition: color 0.3s ease;
         }
 
-        /* ─── HOLOGRAM CARD ─── */
         #hologram-container {
             position: relative;
             width: 100%;
@@ -243,7 +239,6 @@
         #hologram-card p { color: #555; font-weight: 300; text-align: center; max-width: 80%; }
         #hologram-card .tag { margin-top: 1rem; font-size: 0.65rem; color: #888; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid #ddd; padding: 0.3rem 1.5rem; }
 
-        /* ─── CLIENTS SECTION ─── */
         .client-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -254,7 +249,6 @@
         .client-wrapper .stat-grid { align-content: start; }
         .client-wrapper #hologram-container { height: 100%; min-height: 280px; }
 
-        /* ─── TESTIMONIALS ─── */
         .testimonial-item {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -294,7 +288,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* ─── RECOMMENDATIONS ─── */
         .rec-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
@@ -330,7 +323,7 @@
             line-height: 1.6;
         }
 
-        /* ─── CONTACT FORM ─── */
+        /* CONTACT FORM */
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -477,7 +470,7 @@
 </head>
 <body>
 
-    <!-- ===== HERO ===== -->
+    <!-- HERO -->
     <section style="padding-top: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #e2e8f0;">
         <div class="container text-center">
             <div class="giant-name">TM SHIBLI<br />NOMANI</div>
@@ -494,7 +487,7 @@
         </div>
     </section>
 
-    <!-- ===== ABOUT ===== -->
+    <!-- ABOUT -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -523,7 +516,7 @@
         </div>
     </section>
 
-    <!-- ===== EXPERTISE ===== -->
+    <!-- EXPERTISE -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">⦿ Core Expertise</div>
@@ -536,7 +529,7 @@
         </div>
     </section>
 
-    <!-- ===== SERVICES ===== -->
+    <!-- SERVICES -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ What I Deliver</div>
@@ -551,7 +544,7 @@
         </div>
     </section>
 
-    <!-- ===== AUTOMATION ===== -->
+    <!-- AUTOMATION -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -577,7 +570,7 @@
         </div>
     </section>
 
-    <!-- ===== VALUE ===== -->
+    <!-- VALUE -->
     <section>
         <div class="container">
             <div class="flex-grid flex-grid-2">
@@ -596,7 +589,7 @@
         </div>
     </section>
 
-    <!-- ===== CLIENTS & IMPACT ===== -->
+    <!-- CLIENTS & IMPACT -->
     <section>
         <div class="container">
             <div class="text-center">
@@ -625,7 +618,7 @@
         </div>
     </section>
 
-    <!-- ===== TESTIMONIALS ===== -->
+    <!-- TESTIMONIALS -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ What Clients Say</div>
@@ -637,7 +630,7 @@
         </div>
     </section>
 
-    <!-- ===== RECOMMENDATIONS ===== -->
+    <!-- RECOMMENDATIONS -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ Recommendations &amp; Referrals</div>
@@ -681,7 +674,7 @@
         </div>
     </section>
 
-    <!-- ===== CONTACT (EmailJS) ===== -->
+    <!-- CONTACT (EmailJS) -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
             <div class="section-title uppercase">Contact TM SHIBLI</div>
@@ -706,13 +699,13 @@
                     <span class="icon"><i class="fas fa-concierge-bell"></i></span>
                     <select name="service_type" id="service_type">
                         <option value="" disabled selected>— Select Service —</option>
-                        <option value="Free Consultation">✨ Free Consultation</option>
-                        <option value="React / Next.js Development">⚛️ React / Next.js Development</option>
-                        <option value="AI Automation (n8n, OpenAI)">🤖 AI Automation (n8n, OpenAI)</option>
-                        <option value="Shopify Store Setup">🛍️ Shopify Store Setup</option>
-                        <option value="WordPress Development">📝 WordPress Development</option>
-                        <option value="Full‑Stack Web Application">🌐 Full‑Stack Web Application</option>
-                        <option value="Other / Custom Project">📌 Other / Custom Project</option>
+                        <option value="Free Consultation">Free Consultation</option>
+                        <option value="React / Next.js Development">React / Next.js Development</option>
+                        <option value="AI Automation (n8n, OpenAI)">AI Automation (n8n, OpenAI)</option>
+                        <option value="Shopify Store Setup">Shopify Store Setup</option>
+                        <option value="WordPress Development">WordPress Development</option>
+                        <option value="Full‑Stack Web Application">Full‑Stack Web Application</option>
+                        <option value="Other / Custom Project">Other / Custom Project</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -746,12 +739,17 @@
         </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- EMAILJS SCRIPT                                               -->
-    <!-- ============================================================ -->
+    <!-- EMAILJS SCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        emailjs.init("I2dT5S5NuLKgHHHaM");
+        // =========================================================
+        // PLEASE UPDATE YOUR SERVICE ID & TEMPLATE ID BELOW
+        // =========================================================
+        const SERVICE_ID = "service_x4451da";   // Replace with your actual Service ID
+        const TEMPLATE_ID = "template_jrwe5dl"; // Replace with your actual Template ID
+        const PUBLIC_KEY = "I2dT5S5NuLKgHHHaM"; // Your Public Key
+
+        emailjs.init(PUBLIC_KEY);
 
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('contactForm');
@@ -774,7 +772,7 @@
                     message: document.getElementById('user_message').value
                 };
 
-                emailjs.send('service_x4451da', 'template_jrwe5dl', templateParams)
+                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
                     .then(function() {
                         statusDiv.style.color = '#1a7a3a';
                         statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
@@ -784,7 +782,7 @@
                     })
                     .catch(function(error) {
                         statusDiv.style.color = '#b33';
-                        statusDiv.textContent = '❌ Something went wrong. Please try again later. Error: ' + error.text;
+                        statusDiv.textContent = '❌ Error: ' + error.text + '. Please check your Service ID & Template ID.';
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
                     });
@@ -792,7 +790,7 @@
         });
     </script>
 
-    <!-- ===== GSAP ANIMATIONS ===== -->
+    <!-- GSAP ANIMATIONS -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
