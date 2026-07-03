@@ -804,5 +804,62 @@
             });
         });
     </script>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function() {
+            // আপনার দেওয়া Public Key
+            emailjs.init("I2dT5S5NuLKgHHHaM");
+        })();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('formStatus');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // বাটন ডিজেবল ও লোডিং টেক্সট
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                statusDiv.style.display = 'block';
+                statusDiv.style.color = '#333';
+                statusDiv.textContent = 'Sending your message...';
+
+                // ফর্ম ডেটা সংগ্রহ
+                const templateParams = {
+                    from_name: document.getElementById('user_name').value,
+                    from_email: document.getElementById('user_email').value,
+                    subject: document.getElementById('user_subject').value || 'No subject',
+                    service_type: document.getElementById('service_type').value || 'Not specified',
+                    message: document.getElementById('user_message').value
+                };
+
+                // EmailJS-এ ইমেইল পাঠান
+                emailjs.send(
+                    'service_x4451da',    // Service ID (আপনি দিয়েছেন)
+                    'YOUR_TEMPLATE_ID',    // ← এখানে আপনার Template ID বসান
+                    templateParams
+                )
+                .then(function(response) {
+                    statusDiv.style.color = '#1a7a3a';
+                    statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                }, function(error) {
+                    statusDiv.style.color = '#b33';
+                    statusDiv.textContent = '❌ Something went wrong. Please try again later. Error: ' + error.text;
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                });
+            });
+        });
+    </script>
+    
 </body>
 </html>
