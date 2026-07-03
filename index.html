@@ -12,7 +12,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
         /* ─── CUSTOM SCROLLBAR ─── */
-        /* Hide scrollbar by default, show on hover */
         html {
             scrollbar-width: thin;
             scrollbar-color: transparent transparent;
@@ -21,7 +20,6 @@
         html:hover {
             scrollbar-color: #cbd5e1 transparent;
         }
-        /* WebKit scrollbar */
         ::-webkit-scrollbar {
             width: 4px;
             height: 4px;
@@ -273,7 +271,6 @@
             90% { opacity: 0.6; }
             100% { top: 100%; opacity: 0; }
         }
-        /* Hologram icon with glow */
         #hologram-card .hologram-icon {
             font-size: 4rem;
             color: #3d3d3d;
@@ -391,7 +388,7 @@
             line-height: 1.6;
         }
 
-        /* ─── CUSTOM SELECT (COMPACT, FAST, LEFT-ALIGNED) ─── */
+        /* ─── CUSTOM SELECT ─── */
         .custom-select-wrapper {
             position: relative;
             width: 100%;
@@ -600,7 +597,28 @@
             font-weight: 300;
         }
 
-        /* WhatsApp input with autofill support */
+        /* WhatsApp input with autofill support and + prefix */
+        .whatsapp-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .whatsapp-prefix {
+            position: absolute;
+            left: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 0.95rem;
+            font-weight: 400;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .form-group .whatsapp-input {
+            padding-left: 2.2rem !important;
+        }
+
         .form-group input[type="tel"] {
             font-variant-numeric: tabular-nums;
         }
@@ -953,7 +971,7 @@
     </section>
 
     <!-- ============================================================ -->
-    <!-- ===== CONTACT SECTION ===== -->
+    <!-- ===== CONTACT SECTION (FINAL) ===== -->
     <!-- ============================================================ -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
@@ -978,21 +996,24 @@
                             <!-- Service Type (Custom Select) -->
                             <div class="custom-select-wrapper" id="serviceSelectWrapper">
                                 <div class="form-group" style="border-bottom: none; padding: 0;">
-                                    <span class="icon"><i class="far fa-concierge-bell"></i></span>
+                                    <span class="icon"><i class="fas fa-cog"></i></span>
                                     <div class="custom-select-trigger" id="serviceTrigger" tabindex="0">
                                         <span class="trigger-text" id="serviceSelectedText">— Select Your Service —</span>
                                         <span class="trigger-arrow"><i class="fas fa-chevron-down"></i></span>
                                     </div>
                                 </div>
                                 <div class="custom-select-options" id="serviceOptions">
-                                    <!-- Options populated by JS -->
+                                    <!-- Populated by JS -->
                                 </div>
                                 <input type="hidden" name="service_type" id="service_type" required />
                             </div>
-                            <!-- WhatsApp (after service) with autofill support -->
+                            <!-- WhatsApp with + prefix and autofill -->
                             <div class="form-group">
                                 <span class="icon whatsapp-icon"><i class="fab fa-whatsapp"></i></span>
-                                <input type="tel" name="whatsapp" id="user_whatsapp" placeholder="+1XXX XXXXXXX" required autocomplete="tel" x-autocompletetype="tel" inputmode="numeric" />
+                                <div class="whatsapp-wrapper">
+                                    <span class="whatsapp-prefix">+</span>
+                                    <input type="tel" name="whatsapp" id="user_whatsapp" placeholder="1XXX XXXXXXX" required autocomplete="tel" x-autocompletetype="tel" inputmode="numeric" class="whatsapp-input" />
+                                </div>
                             </div>
                         </div>
 
@@ -1050,7 +1071,7 @@
     <script>
         // ===== SERVICE DATA =====
         const serviceOptions = [
-            { value: 'Free Consultation', icon: 'far fa-handshake', label: 'Free Consultation' },
+            { value: 'Free Consultation', icon: 'fas fa-handshake', label: 'Free Consultation' },
             { value: 'React / Next.js Development', icon: 'fab fa-react', label: 'React / Next.js Development' },
             { value: 'AI Automation (n8n, OpenAI)', icon: 'fas fa-robot', label: 'AI Automation (n8n, OpenAI)' },
             { value: 'Shopify Store Setup', icon: 'fab fa-shopify', label: 'Shopify Store Setup' },
@@ -1138,11 +1159,12 @@
 
                 const name = document.getElementById('user_name').value.trim();
                 const email = document.getElementById('user_email').value.trim();
-                const whatsapp = document.getElementById('user_whatsapp').value.trim();
+                const whatsappRaw = document.getElementById('user_whatsapp').value.trim();
+                const whatsapp = '+' + whatsappRaw.replace(/^\+/, '');
                 const service = hiddenInput.value;
                 const message = document.getElementById('user_message').value.trim();
 
-                if (!name || !email || !whatsapp || !service || !message) {
+                if (!name || !email || !whatsappRaw || !service || !message) {
                     statusDiv.className = 'form-status error';
                     statusDiv.style.display = 'block';
                     statusDiv.textContent = '⚠️ Please fill in all fields.';
