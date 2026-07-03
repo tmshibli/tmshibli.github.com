@@ -694,54 +694,63 @@
     <!-- ========================================================= -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        const SERVICE_ID = "service_y8sdaqg";
-        const TEMPLATE_ID = "template_hd8fd77";
-        const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
 
-        emailjs.init(PUBLIC_KEY);
+const SERVICE_ID = "service_y8sdaqg";              // আপনার Service ID
+const ADMIN_TEMPLATE = "template_hd8fd77";        // Admin Notification টেমপ্লেট
+const AUTO_REPLY_TEMPLATE = "template_XXXXXX";    // ← এখানে Auto Reply টেমপ্লেটের ID বসান
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('contactForm');
-            const statusDiv = document.getElementById('formStatus');
-            const submitBtn = document.getElementById('submitBtn');
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const status = document.getElementById('formStatus');
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+    btn.disabled = true;
+    btn.innerHTML = 'Sending...';
+    status.style.display = 'block';
+    status.textContent = 'Sending your message...';
 
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                statusDiv.style.display = 'block';
-                statusDiv.style.color = '#333';
-                statusDiv.textContent = 'Sending your message...';
+    // ১. অ্যাডমিন নোটিফিকেশন (আপনার কাছে)
+    const adminParams = {
+        name: document.getElementById('user_name').value,
+        email: document.getElementById('user_email').value,
+        subject: document.getElementById('user_subject').value || 'No subject',
+        service_type: document.getElementById('service_type').value || 'Not specified',
+        message: document.getElementById('user_message').value
+    };
 
-                // ডেটা সংগ্রহ – নামগুলো টেমপ্লেটের সাথে হুবহু মিলিয়ে দিন
-                const templateParams = {
-                    name: document.getElementById('user_name').value,
-                    email: document.getElementById('user_email').value,
-                    subject: document.getElementById('user_subject').value || 'No subject',
-                    service_type: document.getElementById('service_type').value || 'Not specified',
-                    message: document.getElementById('user_message').value
-                };
+    // ২. অটো রিপ্লাই (দর্শকের কাছে)
+    const autoReplyParams = {
+        to_email: document.getElementById('user_email').value,  // ← দর্শকের ইমেইল
+        name: document.getElementById('user_name').value,
+        service_type: document.getElementById('service_type').value || 'Not specified',
+        message: document.getElementById('user_message').value
+    };
 
-                // debugging: console-এ দেখুন ডেটা আসছে কিনা
-                console.log('Sending data:', templateParams);
-
-                emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-                    .then(function(response) {
-                        statusDiv.style.color = '#1a7a3a';
-                        statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
-                        form.reset();
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                    })
-                    .catch(function(error) {
-                        statusDiv.style.color = '#b33';
-                        statusDiv.textContent = '❌ Error: ' + error.text;
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                    });
-            });
+    // প্রথমে অ্যাডমিন ইমেইল পাঠান
+    emailjs.send(SERVICE_ID, ADMIN_TEMPLATE, adminParams)
+        .then(() => {
+            // অ্যাডমিন ইমেইল গেলে, এখন অটো রিপ্লাই পাঠান
+            status.textContent = 'Sending confirmation to you...';
+            return emailjs.send(SERVICE_ID, AUTO_REPLY_TEMPLATE, autoReplyParams);
+        })
+        .then(() => {
+            // দুটো ইমেইল সফল
+            status.style.color = 'green';
+            status.textContent = '✅ Thank you! A confirmation email has been sent to you.';
+            this.reset();
+            btn.disabled = false;
+            btn.innerHTML = 'Send Message';
+        })
+        .catch((err) => {
+            // কোনো একটি ইমেইল ফেল করলে
+            status.style.color = 'red';
+            status.textContent = '❌ Error: ' + err.text;
+            btn.disabled = false;
+            btn.innerHTML = 'Send Message';
         });
+});
+
+        
     </script>
 
     <!-- GSAP Animations -->
