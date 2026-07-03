@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
-        /* RESET */
+        /* ─── RESET ─── */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -26,6 +26,7 @@
         section { padding: 5rem 0; border-bottom: 1px solid #e2e8f0; }
         section:last-of-type { border-bottom: none; }
 
+        /* ─── TYPOGRAPHY ─── */
         .giant-name {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 900;
@@ -65,6 +66,7 @@
         .body-text strong { color: #111; font-weight: 600; }
         .highlight { color: #111; font-weight: 500; border-bottom: 2px solid #ccc; }
 
+        /* ─── CARDS ─── */
         .card-grid {
             display: grid;
             gap: 1.5rem;
@@ -88,12 +90,21 @@
             transform: translateY(-4px) scale(1.01);
             box-shadow: 0 8px 25px rgba(0,0,0,0.04);
         }
-        .card i, .auto-feature i, .rec-card i {
-            font-size: 2.5rem;
-            color: #111;
-            display: block;
-            margin-bottom: 1rem;
+        /* আইকন কালার ওভাররাইড - #3d3d3d & hover #2d2d2d */
+        .card i, .auto-feature i, .rec-card i,
+        .form-group .icon, .social-icons a, .payment-icons span {
+            color: #3d3d3d;
+            transition: color 0.3s ease;
         }
+        .card:hover i, .auto-feature:hover i, .rec-card:hover i,
+        .social-icons a:hover, .payment-icons span:hover {
+            color: #2d2d2d;
+        }
+        /* WhatsApp icon green override */
+        .whatsapp-icon {
+            color: #25D366 !important;
+        }
+
         .card h4, .auto-feature h5, .rec-card h4 {
             font-size: 1.1rem;
             font-weight: 700;
@@ -175,7 +186,7 @@
         .value-bullet:hover strong { color: #fff; }
         .value-bullet:hover span { color: #ccc; }
         .value-bullet i {
-            color: #111;
+            color: #3d3d3d;
             font-size: 1.2rem;
             margin-top: 0.2rem;
             transition: color 0.3s ease;
@@ -232,7 +243,7 @@
             90% { opacity: 0.6; }
             100% { top: 100%; opacity: 0; }
         }
-        #hologram-card .hologram-icon { font-size: 3.5rem; color: #222; margin-bottom: 0.8rem; }
+        #hologram-card .hologram-icon { font-size: 3.5rem; color: #3d3d3d; margin-bottom: 0.8rem; }
         #hologram-card h3 { font-size: 1.8rem; font-weight: 700; color: #111; margin-bottom: 0.3rem; }
         #hologram-card p { color: #555; font-weight: 300; text-align: center; max-width: 80%; }
         #hologram-card .tag { margin-top: 1rem; font-size: 0.65rem; color: #888; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid #ddd; padding: 0.3rem 1.5rem; }
@@ -259,7 +270,7 @@
         }
         .testimonial-item i {
             font-size: 2rem;
-            color: #111;
+            color: #3d3d3d;
             display: block;
             margin-bottom: 1rem;
             opacity: 0.2;
@@ -302,7 +313,7 @@
         }
         .rec-card i {
             font-size: 2.8rem;
-            color: #111;
+            color: #3d3d3d;
             display: block;
             margin-bottom: 0.8rem;
         }
@@ -321,7 +332,130 @@
             line-height: 1.6;
         }
 
-        /* ===== CONTACT FORM (Custom Layout) ===== */
+        /* ─── CUSTOM SELECT (with icons) ─── */
+        .custom-select-wrapper {
+            position: relative;
+            width: 100%;
+            background: transparent;
+        }
+
+        .custom-select-trigger {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0.5rem;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #e2e8f0;
+            color: #111;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+            width: 100%;
+            outline: none;
+        }
+
+        .custom-select-trigger:focus {
+            border-bottom-color: #111;
+        }
+
+        .custom-select-trigger .trigger-icon {
+            color: #3d3d3d;
+            font-size: 1.2rem;
+            width: 2rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .custom-select-trigger .trigger-text {
+            flex: 1;
+            text-align: left;
+            color: #aaa;
+            font-weight: 300;
+        }
+
+        .custom-select-trigger .trigger-text.selected {
+            color: #111;
+            font-weight: 400;
+        }
+
+        .custom-select-trigger .trigger-arrow {
+            color: #3d3d3d;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .custom-select-trigger.open .trigger-arrow {
+            transform: rotate(180deg);
+        }
+
+        .custom-select-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-top: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            z-index: 100;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .custom-select-options.open {
+            max-height: 300px;
+            opacity: 1;
+            overflow-y: auto;
+        }
+
+        .custom-select-option {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+            color: #333;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .custom-select-option:last-child {
+            border-bottom: none;
+        }
+
+        .custom-select-option .option-icon {
+            color: #3d3d3d;
+            font-size: 1.1rem;
+            width: 2rem;
+            text-align: center;
+            flex-shrink: 0;
+            margin-right: 0.5rem;
+        }
+
+        .custom-select-option .option-text {
+            flex: 1;
+        }
+
+        /* Hover → black background, white text */
+        .custom-select-option:hover {
+            background: #111 !important;
+            color: #fff !important;
+        }
+
+        .custom-select-option:hover .option-icon {
+            color: #fff !important;
+        }
+
+        .custom-select-option.selected {
+            background: #f5f7fa;
+            font-weight: 500;
+        }
+
+        /* ─── CONTACT FORM ─── */
         .contact-wrapper {
             max-width: 900px;
             width: 100%;
@@ -374,7 +508,7 @@
         }
 
         .form-group .icon {
-            color: #111;
+            color: #3d3d3d;
             font-size: 1.2rem;
             width: 2rem;
             text-align: center;
@@ -382,8 +516,7 @@
         }
 
         .form-group input,
-        .form-group textarea,
-        .form-group select {
+        .form-group textarea {
             width: 100%;
             padding: 0.8rem 0.5rem;
             background: transparent;
@@ -400,32 +533,9 @@
         }
 
         .form-group input::placeholder,
-        .form-group textarea::placeholder,
-        .form-group select:invalid {
+        .form-group textarea::placeholder {
             color: #aaa;
             font-weight: 300;
-        }
-
-        select {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.8rem center;
-            background-size: 12px 8px;
-            cursor: pointer;
-        }
-
-        /* Custom placeholder style for WhatsApp */
-        .whatsapp-placeholder {
-            position: relative;
-        }
-        .whatsapp-placeholder input {
-            width: 100%;
-        }
-        .whatsapp-placeholder input::placeholder {
-            color: #aaa;
-            font-weight: 300;
-            font-size: 0.95rem;
         }
 
         .btn-sharp {
@@ -462,7 +572,6 @@
             z-index: 2;
         }
 
-        /* Spam Warning */
         .spam-warning {
             font-size: 0.7rem;
             color: #888;
@@ -476,7 +585,6 @@
             margin-right: 4px;
         }
 
-        /* Form Status */
         .form-status {
             padding: 0.8rem 1.2rem;
             text-align: center;
@@ -500,7 +608,7 @@
             color: #b33;
         }
 
-        /* ===== LOVE PARTICLES ===== */
+        /* ─── LOVE PARTICLES ─── */
         #loveParticles {
             position: fixed;
             top: 0;
@@ -539,12 +647,12 @@
             flex-wrap: wrap;
         }
         .social-icons a {
-            color: #999;
+            color: #3d3d3d;
             font-size: 1.6rem;
             transition: 0.3s ease;
             text-decoration: none;
         }
-        .social-icons a:hover { color: #111; transform: translateY(-4px); }
+        .social-icons a:hover { color: #2d2d2d; transform: translateY(-4px); }
 
         .payment-icons {
             display: flex;
@@ -554,13 +662,13 @@
             margin-top: 0.8rem;
         }
         .payment-icons span {
-            color: #bbb;
+            color: #3d3d3d;
             font-size: 1.2rem;
             transition: 0.3s ease;
             opacity: 0.5;
         }
         .payment-icons span:hover {
-            color: #111;
+            color: #2d2d2d;
             opacity: 1;
             transform: translateY(-2px);
         }
@@ -736,7 +844,7 @@
                 <div id="hologram-container">
                     <div id="hologram-card">
                         <div class="scan-line"></div>
-                        <div class="hologram-icon"><i class="fas fa-cube"></i></div>
+                        <div class="hologram-icon"><i class="far fa-cube"></i></div>
                         <h3>Hologram Studio</h3>
                         <p>Interactive 3D experiences · Real-time data visualization · Immersive brand storytelling</p>
                         <div class="tag">✦ pioneering the future ✦</div>
@@ -781,45 +889,46 @@
             <div class="section-title uppercase">Contact TM SHIBLI</div>
             <p class="body-text" style="margin: 0 auto 2rem auto;">Ready to build something extraordinary? Let's connect.</p>
 
-            <!-- Form Status -->
             <div id="formStatus" class="form-status"></div>
 
             <div class="contact-wrapper">
                 <form id="contactForm" novalidate>
                     <div class="form-grid">
-                        <!-- LEFT: Name, Email, WhatsApp, Service -->
+                        <!-- LEFT: Name, Email, Service, WhatsApp -->
                         <div class="form-left">
                             <div class="form-group">
-                                <span class="icon"><i class="fas fa-user"></i></span>
+                                <span class="icon"><i class="far fa-user"></i></span>
                                 <input type="text" name="name" id="user_name" placeholder="Your Full Name" required autocomplete="name" />
                             </div>
                             <div class="form-group">
-                                <span class="icon"><i class="fas fa-envelope"></i></span>
+                                <span class="icon"><i class="far fa-envelope"></i></span>
                                 <input type="email" name="email" id="user_email" placeholder="Your Email Address" required autocomplete="email" />
                             </div>
-                            <div class="form-group whatsapp-placeholder">
-                                <span class="icon"><i class="fab fa-whatsapp"></i></span>
-                                <input type="tel" name="whatsapp" id="user_whatsapp" placeholder="+1XXX XXXXXXX" required autocomplete="tel" />
+                            <!-- Service Type (Custom Select) -->
+                            <div class="custom-select-wrapper" id="serviceSelectWrapper">
+                                <div class="form-group" style="border-bottom: none; padding: 0;">
+                                    <span class="icon"><i class="far fa-concierge-bell"></i></span>
+                                    <div class="custom-select-trigger" id="serviceTrigger" tabindex="0">
+                                        <span class="trigger-text" id="serviceSelectedText">— Select Your Service —</span>
+                                        <span class="trigger-arrow"><i class="fas fa-chevron-down"></i></span>
+                                    </div>
+                                </div>
+                                <div class="custom-select-options" id="serviceOptions">
+                                    <!-- Options will be populated by JS -->
+                                </div>
+                                <input type="hidden" name="service_type" id="service_type" required />
                             </div>
+                            <!-- WhatsApp (after service) -->
                             <div class="form-group">
-                                <span class="icon"><i class="fas fa-concierge-bell"></i></span>
-                                <select name="service_type" id="service_type" required>
-                                    <option value="" disabled selected>— Select Your Service —</option>
-                                    <option value="Free Consultation">Free Consultation</option>
-                                    <option value="React / Next.js Development">React / Next.js Development</option>
-                                    <option value="AI Automation (n8n, OpenAI)">AI Automation (n8n, OpenAI)</option>
-                                    <option value="Shopify Store Setup">Shopify Store Setup</option>
-                                    <option value="WordPress Development">WordPress Development</option>
-                                    <option value="Full‑Stack Web Application">Full‑Stack Web Application</option>
-                                    <option value="Other / Custom Project">Other / Custom Project</option>
-                                </select>
+                                <span class="icon whatsapp-icon"><i class="fab fa-whatsapp"></i></span>
+                                <input type="tel" name="whatsapp" id="user_whatsapp" placeholder="+1XXX XXXXXXX" required autocomplete="tel" inputmode="numeric" />
                             </div>
                         </div>
 
                         <!-- RIGHT: Message -->
                         <div class="form-right">
                             <div class="form-group">
-                                <span class="icon" style="align-self:flex-start; margin-top:0.8rem;"><i class="fas fa-comment"></i></span>
+                                <span class="icon" style="align-self:flex-start; margin-top:0.8rem;"><i class="far fa-comment"></i></span>
                                 <textarea name="message" id="user_message" placeholder="Tell me about your project, goals, and what you need help with..." required></textarea>
                             </div>
                         </div>
@@ -838,7 +947,6 @@
                 </form>
             </div>
 
-            <!-- Social & Payment Icons -->
             <div class="social-icons">
                 <a href="https://linkedin.com/in/tmshibli" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/tmshibli" target="_blank"><i class="fab fa-github"></i></a>
@@ -856,7 +964,7 @@
                 <span><i class="fab fa-stripe"></i></span>
                 <span><i class="fab fa-bitcoin"></i></span>
                 <span><i class="fab fa-payoneer"></i></span>
-                <span><i class="fas fa-credit-card"></i></span>
+                <span><i class="far fa-credit-card"></i></span>
             </div>
         </div>
     </section>
@@ -869,7 +977,78 @@
     <!-- ============================================================ -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        // ===== EMAILJS CREDENTIALS =====
+        // ===== SERVICE DATA FOR CUSTOM SELECT =====
+        const serviceOptions = [
+            { value: 'Free Consultation', icon: 'far fa-handshake', label: 'Free Consultation' },
+            { value: 'React / Next.js Development', icon: 'fab fa-react', label: 'React / Next.js Development' },
+            { value: 'AI Automation (n8n, OpenAI)', icon: 'fas fa-robot', label: 'AI Automation (n8n, OpenAI)' },
+            { value: 'Shopify Store Setup', icon: 'fab fa-shopify', label: 'Shopify Store Setup' },
+            { value: 'WordPress Development', icon: 'fab fa-wordpress', label: 'WordPress Development' },
+            { value: 'Full‑Stack Web Application', icon: 'fas fa-layer-group', label: 'Full‑Stack Web Application' },
+            { value: 'Other / Custom Project', icon: 'far fa-star', label: 'Other / Custom Project' }
+        ];
+
+        // ===== POPULATE CUSTOM SELECT =====
+        const optionsContainer = document.getElementById('serviceOptions');
+        const trigger = document.getElementById('serviceTrigger');
+        const selectedText = document.getElementById('serviceSelectedText');
+        const hiddenInput = document.getElementById('service_type');
+
+        serviceOptions.forEach(opt => {
+            const div = document.createElement('div');
+            div.className = 'custom-select-option';
+            div.dataset.value = opt.value;
+            div.innerHTML = `<span class="option-icon"><i class="${opt.icon}"></i></span><span class="option-text">${opt.label}</span>`;
+            div.addEventListener('click', function(e) {
+                e.stopPropagation();
+                selectOption(this);
+            });
+            optionsContainer.appendChild(div);
+        });
+
+        function selectOption(el) {
+            const value = el.dataset.value;
+            const label = el.querySelector('.option-text').textContent;
+            hiddenInput.value = value;
+            selectedText.textContent = label;
+            selectedText.className = 'trigger-text selected';
+            // Remove selected class from all
+            document.querySelectorAll('.custom-select-option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            closeDropdown();
+        }
+
+        // Toggle dropdown
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('open');
+            optionsContainer.classList.toggle('open');
+        });
+
+        // Close on outside click
+        document.addEventListener('click', function(e) {
+            const wrapper = document.getElementById('serviceSelectWrapper');
+            if (!wrapper.contains(e.target)) {
+                closeDropdown();
+            }
+        });
+
+        function closeDropdown() {
+            trigger.classList.remove('open');
+            optionsContainer.classList.remove('open');
+        }
+
+        // Keyboard support: Enter/Space to toggle
+        trigger.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+
+        // ============================================================
+        // EMAILJS CREDENTIALS
+        // ============================================================
         const SERVICE_ID = "service_y8sdaqg";
         const ADMIN_TEMPLATE = "template_hd8fd77";
         const AUTO_REPLY_TEMPLATE = "template_3b9dg0g";
@@ -883,21 +1062,18 @@
             const submitBtn = document.getElementById('submitBtn');
             const loveContainer = document.getElementById('loveParticles');
 
-            // ===== AUTO-FILL: Browser stores info, just trigger autocomplete =====
-            // All inputs have autocomplete attributes: name, email, tel
-            // Browsers will fill them automatically on click/focus
-
             // ===== FORM SUBMISSION =====
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                // Validate all fields
+                // Gather data
                 const name = document.getElementById('user_name').value.trim();
                 const email = document.getElementById('user_email').value.trim();
                 const whatsapp = document.getElementById('user_whatsapp').value.trim();
-                const service = document.getElementById('service_type').value;
+                const service = hiddenInput.value;
                 const message = document.getElementById('user_message').value.trim();
 
+                // Validate all fields
                 if (!name || !email || !whatsapp || !service || !message) {
                     statusDiv.className = 'form-status error';
                     statusDiv.style.display = 'block';
@@ -915,7 +1091,7 @@
                 statusDiv.style.borderColor = '#e2e8f0';
                 statusDiv.style.background = '#f9fafc';
 
-                // ===== Admin Params =====
+                // Admin Params
                 const adminParams = {
                     name: name,
                     email: email,
@@ -924,7 +1100,7 @@
                     message: message
                 };
 
-                // ===== Auto Reply Params =====
+                // Auto Reply Params
                 const autoReplyParams = {
                     to_email: email,
                     name: name,
@@ -933,25 +1109,24 @@
                     message: message
                 };
 
-                // ===== Send Emails =====
+                // Send Admin, then Auto Reply
                 emailjs.send(SERVICE_ID, ADMIN_TEMPLATE, adminParams)
                     .then(() => {
                         statusDiv.textContent = 'Sending confirmation to you...';
                         return emailjs.send(SERVICE_ID, AUTO_REPLY_TEMPLATE, autoReplyParams);
                     })
                     .then(() => {
-                        // Success!
                         statusDiv.className = 'form-status success';
                         statusDiv.style.display = 'block';
                         statusDiv.textContent = '✅ Thank you! A confirmation email has been sent to your inbox. (Please check your spam folder if you don\'t see it.)';
-
-                        // Reset form
                         form.reset();
-
-                        // ===== LOVE PARTICLES =====
+                        // Reset custom select
+                        selectedText.textContent = '— Select Your Service —';
+                        selectedText.className = 'trigger-text';
+                        hiddenInput.value = '';
+                        document.querySelectorAll('.custom-select-option').forEach(opt => opt.classList.remove('selected'));
+                        // Launch love particles
                         launchLoveParticles();
-
-                        // Re-enable button
                         submitBtn.disabled = false;
                         submitBtn.innerHTML = '<span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>';
                     })
@@ -964,11 +1139,10 @@
                     });
             });
 
-            // ===== LOVE PARTICLES FUNCTION =====
+            // ===== LOVE PARTICLES =====
             function launchLoveParticles() {
                 const emojis = ['❤️', '💖', '💕', '💗', '💓', '♥️', '💘', '💝'];
                 const count = 35;
-
                 for (let i = 0; i < count; i++) {
                     const particle = document.createElement('div');
                     particle.className = 'love-particle';
@@ -977,28 +1151,11 @@
                     particle.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
                     particle.style.animationDuration = (2.5 + Math.random() * 3) + 's';
                     particle.style.animationDelay = (Math.random() * 1.5) + 's';
-
-                    // Random rotation and scale variation
-                    const randomRotate = (Math.random() - 0.5) * 40;
-                    particle.style.setProperty('--rotate', randomRotate + 'deg');
-
                     loveContainer.appendChild(particle);
-
-                    // Remove after animation ends
-                    setTimeout(() => {
-                        particle.remove();
-                    }, 6000);
+                    setTimeout(() => particle.remove(), 6000);
                 }
-
-                // Clear after all done
-                setTimeout(() => {
-                    loveContainer.innerHTML = '';
-                }, 7000);
+                setTimeout(() => loveContainer.innerHTML = '', 7000);
             }
-
-            // ===== AUTO-FILL TRIGGER (click on fields to show browser suggestions) =====
-            // Browsers handle autocomplete automatically when input has autocomplete attribute.
-            // Just clicking the field will show saved suggestions.
         });
     </script>
 
@@ -1036,6 +1193,5 @@
             });
         });
     </script>
-
 </body>
 </html>
