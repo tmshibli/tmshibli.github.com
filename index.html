@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
-        /* ─── RESET ─── */
+        /* ─── রিসেট ─── */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -21,25 +21,12 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
-
-        /* ─── NO ROUNDED CORNERS ─── */
         * { border-radius: 0 !important; }
-
-        /* ─── CONTAINER ─── */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* ─── SECTIONS ─── */
-        section {
-            padding: 5rem 0;
-            border-bottom: 1px solid #e8e8e8;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 5rem 0; border-bottom: 1px solid #e8e8e8; }
         section:last-of-type { border-bottom: none; }
 
-        /* ─── TYPOGRAPHY ─── */
+        /* ─── টাইপোগ্রাফি ─── */
         .giant-name {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 900;
@@ -62,12 +49,6 @@
             font-weight: 600;
             color: #333;
         }
-        .subhead {
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
-            font-weight: 300;
-            color: #555;
-            margin-bottom: 2rem;
-        }
         .body-text {
             font-size: clamp(1rem, 1.2vw, 1.1rem);
             font-weight: 300;
@@ -85,7 +66,7 @@
         .body-text strong { color: #111; font-weight: 600; }
         .highlight { color: #111; font-weight: 500; border-bottom: 2px solid #ccc; }
 
-        /* ─── CARDS (with 3D tilt on hover) ─── */
+        /* ─── কার্ড ─── */
         .card-grid {
             display: grid;
             gap: 1.5rem;
@@ -137,7 +118,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* --- RECOMMENDATION LINK (span version, no URL in status bar) --- */
+        /* ─── রেকমেন্ডেশন লিংক ─── */
         .rec-link {
             display: inline-block;
             margin-top: 1rem;
@@ -159,7 +140,7 @@
             color: #111;
         }
 
-        /* ─── STATS ─── */
+        /* ─── পরিসংখ্যান ─── */
         .stat-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -178,7 +159,7 @@
             margin-top: 4px;
         }
 
-        /* ─── VALUE BULLET ─── */
+        /* ─── ভ্যালু বুলেট ─── */
         .value-bullet {
             display: flex;
             gap: 1.2rem;
@@ -219,7 +200,7 @@
             transition: color 0.3s ease;
         }
 
-        /* ─── HOLOGRAM CARD ─── */
+        /* ─── হলোগ্রাম কার্ড ─── */
         #hologram-container {
             position: relative;
             width: 100%;
@@ -262,7 +243,7 @@
         #hologram-card p { color: #555; font-weight: 300; text-align: center; max-width: 80%; }
         #hologram-card .tag { margin-top: 1rem; font-size: 0.65rem; color: #888; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid #ddd; padding: 0.3rem 1.5rem; }
 
-        /* ─── CLIENTS SECTION ─── */
+        /* ─── ক্লায়েন্ট সেকশন ─── */
         .client-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -273,7 +254,7 @@
         .client-wrapper .stat-grid { align-content: start; }
         .client-wrapper #hologram-container { height: 100%; min-height: 280px; }
 
-        /* ─── TESTIMONIALS ─── */
+        /* ─── টেস্টিমোনিয়াল ─── */
         .testimonial-item {
             background: #fafafa;
             border: 1px solid #ececec;
@@ -313,7 +294,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* ─── RECOMMENDATIONS (specific) ─── */
+        /* ─── রেকমেন্ডেশন ─── */
         .rec-card {
             background: #fafafa;
             border: 1px solid #ececec;
@@ -349,7 +330,7 @@
             line-height: 1.6;
         }
 
-        /* ─── CONTACT FORM ─── */
+        /* ─── কন্টাক্ট ফর্ম ─── */
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -365,9 +346,16 @@
             transition: border-color 0.3s ease;
         }
         .form-group:focus-within { border-bottom-color: #111; }
-        .form-group .icon { color: #888; font-size: 1.2rem; width: 2rem; text-align: center; }
+        .form-group .icon {
+            color: #111;
+            font-size: 1.2rem;
+            width: 2rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 0.8rem 0.5rem;
             background: transparent;
@@ -379,7 +367,17 @@
         }
         .form-group textarea { min-height: 100px; resize: vertical; }
         .form-group input::placeholder,
-        .form-group textarea::placeholder { color: #aaa; font-weight: 300; }
+        .form-group textarea::placeholder,
+        .form-group select:invalid { color: #aaa; font-weight: 300; }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.8rem center;
+            background-size: 12px 8px;
+            cursor: pointer;
+        }
 
         .btn-sharp {
             display: inline-block;
@@ -425,7 +423,6 @@
         }
         .social-icons a:hover { color: #111; transform: translateY(-4px); }
 
-        /* ─── PAYMENT METHODS ─── */
         .payment-icons {
             display: flex;
             justify-content: center;
@@ -445,20 +442,14 @@
             transform: translateY(-2px);
         }
 
-        /* ─── LAYOUT HELPERS ─── */
         .flex-grid {
             display: grid;
             gap: 3rem;
         }
         .flex-grid-2 { grid-template-columns: 1fr 1fr; }
         .flex-grid-2 .left { border-left: 3px solid #ddd; padding-left: 2rem; }
-
         .text-center { text-align: center; }
-        .mt-2 { margin-top: 2rem; }
-        .mb-2 { margin-bottom: 2rem; }
-        .w-full { width: 100%; }
 
-        /* ─── RESPONSIVE ─── */
         @media (max-width: 900px) {
             .flex-grid-2 { grid-template-columns: 1fr; }
             .flex-grid-2 .left { border-left: 0; padding-left: 0; }
@@ -480,23 +471,11 @@
             .payment-icons { gap: 1rem; }
             .payment-icons span { font-size: 1rem; }
         }
-
-
-select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.8rem center;
-    background-size: 12px 8px;
-    cursor: pointer;
-}
-
-        
     </style>
 </head>
 <body>
 
-    <!-- ===== HERO ===== -->
+    <!-- ===== হিরো ===== -->
     <section style="padding-top: 4rem; padding-bottom: 2rem; border-bottom: 1px solid #eee;">
         <div class="container text-center">
             <div class="giant-name">TM SHIBLI<br />NOMANI</div>
@@ -656,7 +635,7 @@ select {
         </div>
     </section>
 
-    <!-- ===== RECOMMENDATIONS (UPDATED: 4 items, links hidden) ===== -->
+    <!-- ===== RECOMMENDATIONS ===== -->
     <section>
         <div class="container">
             <div class="section-title uppercase text-center">✦ Recommendations &amp; Referrals</div>
@@ -700,39 +679,30 @@ select {
         </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
-        <!-- ===== CONTACT (EmailJS) ===== -->
+    <!-- ===== CONTACT (EmailJS) ===== -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
             <div class="section-title uppercase">Let's Pioneer</div>
             <p class="body-text" style="margin: 0 auto 2rem auto;">Ready to build something extraordinary? Let's connect.</p>
 
-            <!-- ফর্ম সাবমিশনের স্ট্যাটাস মেসেজ দেখানোর জন্য -->
             <div id="formStatus" style="margin-bottom:1.5rem; font-weight:500; display:none;"></div>
 
             <form id="contactForm" class="contact-form">
-                <!-- নাম -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-user"></i></span>
                     <input type="text" name="name" id="user_name" placeholder="Your Name" required />
                 </div>
-
-                <!-- ইমেইল -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-envelope"></i></span>
                     <input type="email" name="email" id="user_email" placeholder="Your Email" required />
                 </div>
-
-                <!-- সাবজেক্ট -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-pen"></i></span>
                     <input type="text" name="subject" id="user_subject" placeholder="Subject" />
                 </div>
-
-                <!-- সার্ভিস টাইপ ড্রপডাউন (নতুন) -->
                 <div class="form-group" style="border-bottom: 2px solid #e0e0e0;">
                     <span class="icon"><i class="fas fa-concierge-bell"></i></span>
-                    <select name="service_type" id="service_type" style="width:100%; padding:0.8rem 0.5rem; background:transparent; border:none; outline:none; color:#111; font-size:1rem; font-family:'Inter', sans-serif; appearance:none; cursor:pointer;">
+                    <select name="service_type" id="service_type">
                         <option value="" disabled selected>— Select Service —</option>
                         <option value="Free Consultation">✨ Free Consultation</option>
                         <option value="React / Next.js Development">⚛️ React / Next.js Development</option>
@@ -743,19 +713,15 @@ select {
                         <option value="Other / Custom Project">📌 Other / Custom Project</option>
                     </select>
                 </div>
-
-                <!-- বার্তা -->
                 <div class="form-group">
                     <span class="icon"><i class="fas fa-comment"></i></span>
                     <textarea name="message" id="user_message" placeholder="Your Message" required></textarea>
                 </div>
-
                 <button type="submit" class="btn-sharp" id="submitBtn">
                     <i class="fas fa-paper-plane"></i> Send Message
                 </button>
             </form>
 
-            <!-- সোশ্যাল আইকন ও পেমেন্ট মেথড (আগের মতো) -->
             <div class="social-icons">
                 <a href="https://linkedin.com/in/tmshibli" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://github.com/tmshibli" target="_blank"><i class="fab fa-github"></i></a>
@@ -778,55 +744,11 @@ select {
         </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // ─── 3D TILT ON HOVER ───
-            const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
-
-            tiltElements.forEach(el => {
-                el.addEventListener('mousemove', function(e) {
-                    const rect = this.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    const rotateX = ((y - centerY) / centerY) * -6;
-                    const rotateY = ((x - centerX) / centerX) * 6;
-                    this.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
-                    this.style.transition = 'transform 0.1s ease';
-                });
-
-                el.addEventListener('mouseleave', function() {
-                    this.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
-                    this.style.transition = 'transform 0.3s ease';
-                });
-            });
-
-            // ─── GSAP FADE-UPS ───
-            gsap.registerPlugin(ScrollTrigger);
-            gsap.utils.toArray('.card, .stat-box, .auto-feature, .testimonial-item, .value-bullet, .rec-card, .body-text, .section-title').forEach(el => {
-                gsap.from(el, {
-                    scrollTrigger: { trigger: el, start: 'top 95%', toggleActions: 'play none none none' },
-                    opacity: 0,
-                    y: 20,
-                    duration: 0.8,
-                    ease: 'power1.out'
-                });
-            });
-        });
-    </script>
-
-    <!-- EmailJS SDK -->
+    <!-- EmailJS Script -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        (function() {
-           
-            emailjs.init("I2dT5S5NuLKgHHHaM");
-        })();
-    </script>
+        emailjs.init("I2dT5S5NuLKgHHHaM");
 
-    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('contactForm');
             const statusDiv = document.getElementById('formStatus');
@@ -834,7 +756,6 @@ select {
 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 statusDiv.style.display = 'block';
@@ -849,26 +770,57 @@ select {
                     message: document.getElementById('user_message').value
                 };
 
-                emailjs.send(
-                    'service_x4451da',  
-                    'template_jrwe5dl', 
-                    templateParams
-                )
-                .then(function(response) {
-                    statusDiv.style.color = '#1a7a3a';
-                    statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
-                    form.reset();
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                }, function(error) {
-                    statusDiv.style.color = '#b33';
-                    statusDiv.textContent = '❌ Something went wrong. Please try again later. Error: ' + error.text;
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                emailjs.send('service_x4451da', 'template_jrwe5dl', templateParams)
+                    .then(function() {
+                        statusDiv.style.color = '#1a7a3a';
+                        statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
+                        form.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    })
+                    .catch(function(error) {
+                        statusDiv.style.color = '#b33';
+                        statusDiv.textContent = '❌ Something went wrong. Please try again later. Error: ' + error.text;
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    });
+            });
+        });
+    </script>
+
+    <!-- GSAP Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
+            tiltElements.forEach(el => {
+                el.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
+                    this.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+                    this.style.transition = 'transform 0.1s ease';
+                });
+                el.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+            });
+
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.card, .stat-box, .auto-feature, .testimonial-item, .value-bullet, .rec-card, .body-text, .section-title').forEach(el => {
+                gsap.from(el, {
+                    scrollTrigger: { trigger: el, start: 'top 95%', toggleActions: 'play none none none' },
+                    opacity: 0,
+                    y: 20,
+                    duration: 0.8,
+                    ease: 'power1.out'
                 });
             });
         });
     </script>
-    
 </body>
 </html>
