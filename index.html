@@ -674,7 +674,7 @@
         </div>
     </section>
 
-    <!-- CONTACT (EmailJS) -->
+    <!-- CONTACT (EmailJS with correct credentials) -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
             <div class="section-title uppercase">Contact TM SHIBLI</div>
@@ -739,16 +739,19 @@
         </div>
     </section>
 
-    <!-- EMAILJS SCRIPT -->
+    <!-- ============================================================ -->
+    <!-- EMAILJS SCRIPT WITH CORRECT CREDENTIALS                      -->
+    <!-- ============================================================ -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         // =========================================================
-        // PLEASE UPDATE YOUR SERVICE ID & TEMPLATE ID BELOW
+        // YOUR CORRECT CREDENTIALS (provided by you)
         // =========================================================
-        const SERVICE_ID = "service_y8sdaqg";   // Replace with your actual Service ID
-        const TEMPLATE_ID = "template_hd8fd77"; // Replace with your actual Template ID
-        const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz"; // Your Public Key
+        const SERVICE_ID = "service_y8sdaqg";
+        const TEMPLATE_ID = "template_hd8fd77";
+        const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
 
+        // Initialize EmailJS with your Public Key
         emailjs.init(PUBLIC_KEY);
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -758,12 +761,15 @@
 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
+
+                // Disable button and show loading state
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 statusDiv.style.display = 'block';
                 statusDiv.style.color = '#333';
                 statusDiv.textContent = 'Sending your message...';
 
+                // Collect form data
                 const templateParams = {
                     from_name: document.getElementById('user_name').value,
                     from_email: document.getElementById('user_email').value,
@@ -772,8 +778,9 @@
                     message: document.getElementById('user_message').value
                 };
 
+                // Send email using EmailJS
                 emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams)
-                    .then(function() {
+                    .then(function(response) {
                         statusDiv.style.color = '#1a7a3a';
                         statusDiv.textContent = '✅ Thank you! Your message has been sent successfully.';
                         form.reset();
