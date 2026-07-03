@@ -11,7 +11,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <style>
-        /* ── Same styles as before ── */
+        /* RESET */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body {
@@ -26,6 +26,7 @@
         section { padding: 5rem 0; border-bottom: 1px solid #e2e8f0; }
         section:last-of-type { border-bottom: none; }
 
+        /* TYPOGRAPHY */
         .giant-name {
             font-size: clamp(3rem, 10vw, 8rem);
             font-weight: 900;
@@ -65,6 +66,7 @@
         .body-text strong { color: #111; font-weight: 600; }
         .highlight { color: #111; font-weight: 500; border-bottom: 2px solid #ccc; }
 
+        /* CARDS */
         .card-grid {
             display: grid;
             gap: 1.5rem;
@@ -361,7 +363,6 @@
         .form-group input::placeholder,
         .form-group textarea::placeholder,
         .form-group select:invalid { color: #aaa; font-weight: 300; }
-
         select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
@@ -624,7 +625,7 @@
         </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
+    <!-- CONTACT -->
     <section style="border-bottom: none; padding-bottom: 4rem;">
         <div class="container text-center">
             <div class="section-title uppercase">Contact TM SHIBLI</div>
@@ -689,71 +690,72 @@
         </div>
     </section>
 
-    <!-- ========================================================= -->
-    <!-- EMAILJS JAVASCRIPT (সঠিক ভেরিয়েবল ম্যাপিং)              -->
-    <!-- ========================================================= -->
+    <!-- EMAILJS SCRIPT -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
+        // EmailJS Credentials
+        const SERVICE_ID = "service_y8sdaqg";
+        const ADMIN_TEMPLATE = "template_hd8fd77";
+        const AUTO_REPLY_TEMPLATE = "template_3b9dg0g";  // Updated ID
+        const PUBLIC_KEY = "xcPh9SQRAXxWOSSLz";
 
-const SERVICE_ID = "service_y8sdaqg";              // আপনার Service ID
-const ADMIN_TEMPLATE = "template_hd8fd77";        // Admin Notification টেমপ্লেট
-const AUTO_REPLY_TEMPLATE = "template_XXXXXX";    // ← এখানে Auto Reply টেমপ্লেটের ID বসান
+        emailjs.init(PUBLIC_KEY);
 
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    const status = document.getElementById('formStatus');
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('formStatus');
+            const submitBtn = document.getElementById('submitBtn');
 
-    btn.disabled = true;
-    btn.innerHTML = 'Sending...';
-    status.style.display = 'block';
-    status.textContent = 'Sending your message...';
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-    // ১. অ্যাডমিন নোটিফিকেশন (আপনার কাছে)
-    const adminParams = {
-        name: document.getElementById('user_name').value,
-        email: document.getElementById('user_email').value,
-        subject: document.getElementById('user_subject').value || 'No subject',
-        service_type: document.getElementById('service_type').value || 'Not specified',
-        message: document.getElementById('user_message').value
-    };
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                statusDiv.style.display = 'block';
+                statusDiv.style.color = '#333';
+                statusDiv.textContent = 'Sending your message...';
 
-    // ২. অটো রিপ্লাই (দর্শকের কাছে)
-    const autoReplyParams = {
-        to_email: document.getElementById('user_email').value,  // ← দর্শকের ইমেইল
-        name: document.getElementById('user_name').value,
-        service_type: document.getElementById('service_type').value || 'Not specified',
-        message: document.getElementById('user_message').value
-    };
+                // 1. Admin Notification Data
+                const adminParams = {
+                    name: document.getElementById('user_name').value,
+                    email: document.getElementById('user_email').value,
+                    subject: document.getElementById('user_subject').value || 'No subject',
+                    service_type: document.getElementById('service_type').value || 'Not specified',
+                    message: document.getElementById('user_message').value
+                };
 
-    // প্রথমে অ্যাডমিন ইমেইল পাঠান
-    emailjs.send(SERVICE_ID, ADMIN_TEMPLATE, adminParams)
-        .then(() => {
-            // অ্যাডমিন ইমেইল গেলে, এখন অটো রিপ্লাই পাঠান
-            status.textContent = 'Sending confirmation to you...';
-            return emailjs.send(SERVICE_ID, AUTO_REPLY_TEMPLATE, autoReplyParams);
-        })
-        .then(() => {
-            // দুটো ইমেইল সফল
-            status.style.color = 'green';
-            status.textContent = '✅ Thank you! A confirmation email has been sent to you.';
-            this.reset();
-            btn.disabled = false;
-            btn.innerHTML = 'Send Message';
-        })
-        .catch((err) => {
-            // কোনো একটি ইমেইল ফেল করলে
-            status.style.color = 'red';
-            status.textContent = '❌ Error: ' + err.text;
-            btn.disabled = false;
-            btn.innerHTML = 'Send Message';
+                // 2. Auto Reply Data (Sent to the user's email)
+                const autoReplyParams = {
+                    to_email: document.getElementById('user_email').value,
+                    name: document.getElementById('user_name').value,
+                    service_type: document.getElementById('service_type').value || 'Not specified',
+                    message: document.getElementById('user_message').value
+                };
+
+                // Send Admin email, then Auto Reply
+                emailjs.send(SERVICE_ID, ADMIN_TEMPLATE, adminParams)
+                    .then(() => {
+                        statusDiv.textContent = 'Sending confirmation to you...';
+                        return emailjs.send(SERVICE_ID, AUTO_REPLY_TEMPLATE, autoReplyParams);
+                    })
+                    .then(() => {
+                        statusDiv.style.color = '#1a7a3a';
+                        statusDiv.textContent = '✅ Thank you! A confirmation email has been sent to you.';
+                        form.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    })
+                    .catch((error) => {
+                        statusDiv.style.color = '#b33';
+                        statusDiv.textContent = '❌ Error: ' + error.text;
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                    });
+            });
         });
-});
-
-        
     </script>
 
-    <!-- GSAP Animations -->
+    <!-- GSAP -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tiltElements = document.querySelectorAll('.card, .stat-box, .auto-feature, .testimonial-item, #hologram-card, .rec-card');
